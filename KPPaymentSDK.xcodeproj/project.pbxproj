@@ -218,6 +218,23 @@
 				2E33C5392138374A007FB33D /* KPPayment.swift */,
 				2E33C522213836E2007FB33D /* KPPaymentSDK.h */,
 				2E33C523213836E2007FB33D /* Info.plist */,
+				2ECA6E05213D1A4A005DEE6E /* Crypto */,
+			);
+			path = KPPaymentSDK;
+			sourceTree = "<group>";
+		};
+		2E33C52C213836E2007FB33D /* KPPaymentSDKTests */ = {
+			isa = PBXGroup;
+			children = (
+				2E33C52D213836E2007FB33D /* KPPaymentSDKTests.swift */,
+				2E33C52F213836E2007FB33D /* Info.plist */,
+			);
+			path = KPPaymentSDKTests;
+			sourceTree = "<group>";
+		};
+		2ECA6E05213D1A4A005DEE6E /* Crypto */ = {
+			isa = PBXGroup;
+			children = (
 				2E2F3E8221386ACB00C563E3 /* AES.Cryptors.swift */,
 				2E2F3E9021386ACC00C563E3 /* AES.swift */,
 				2E2F3E9921386ACD00C563E3 /* Array+Extension.swift */,
@@ -290,16 +307,7 @@
 				2E2F3F0621386AFC00C563E3 /* PKCS7.swift */,
 				2E2F3F0921386AFD00C563E3 /* PKCS7Padding.swift */,
 			);
-			path = KPPaymentSDK;
-			sourceTree = "<group>";
-		};
-		2E33C52C213836E2007FB33D /* KPPaymentSDKTests */ = {
-			isa = PBXGroup;
-			children = (
-				2E33C52D213836E2007FB33D /* KPPaymentSDKTests.swift */,
-				2E33C52F213836E2007FB33D /* Info.plist */,
-			);
-			path = KPPaymentSDKTests;
+			path = Crypto;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
