@@ -60,11 +60,11 @@ private protocol KPPaymentAppDelegate: class {
         KPPaymentApplicationDelegate.shared.delegate = nil
     }
 
-    @objc public final func makePaymentForStoreId(_ storeId: NSInteger, withReferenceId referenceId: String, andAmount amount: Float) {
+    @objc public final func makePaymentForStoreId(_ storeId: NSInteger, withReferenceId referenceId: String, andAmount amount: Double) {
         self.referenceId = referenceId
-        var baseURL = "https://sandbox.webcash.com.my"
+        var baseURL = "https://sandbox.webcash.com.my" // TODO: change to staging URL
         if self.isProduction {
-            baseURL = "https://sandbox.webcash.com.my"
+            baseURL = "https://sandbox.webcash.com.my" // TODO: change to production URL
         }
         let checkSum = (self.secret + String(self.merchantId) + String(storeId) + String(format: "%.2f", amount.rounded(toPlaces: 2)) + referenceId).sha1()
         if let appURL = URL(string: "\(baseURL)/ios?MerchantId=\(String(self.merchantId))&StoreId=\(String(storeId))&Amount=\(String(format: "%.2f", amount.rounded(toPlaces: 2)))&ReferenceId=\(referenceId)&CheckSum=\(checkSum)") {
@@ -118,9 +118,9 @@ private protocol KPPaymentAppDelegate: class {
     }
 }
 
-fileprivate extension Float {
-    func rounded(toPlaces places:Int) -> Float {
-        let divisor = pow(10.0, Float(places))
+fileprivate extension Double {
+    func rounded(toPlaces places:Int) -> Double {
+        let divisor = pow(10.0, Double(places))
         return (self * divisor).rounded() / divisor
     }
 }
