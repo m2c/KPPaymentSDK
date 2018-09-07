@@ -75,9 +75,9 @@ private protocol KPPaymentAppDelegate : NSObjectProtocol {
     @objc public final func makePaymentForStoreId(_ storeId: NSInteger, withReferenceId referenceId: String, andAmount amount: Double) {
         self.storeId = storeId
         self.referenceId = referenceId
-        var baseURL = "https://sandbox.webcash.com.my" // TODO: change to staging URL
+        var baseURL = "https://staging.webcash.com.my"
         if self.isProduction {
-            baseURL = "https://sandbox.webcash.com.my" // TODO: change to production URL
+            baseURL = "https://deeplink.kiplepay.com"
         }
         let checkSum = (self.secret + String(self.merchantId) + String(storeId) + String(format: "%.2f", amount.rounded(toPlaces: 2)) + referenceId).sha1()
         if let appURL = URL(string: "\(baseURL)/ios?MerchantId=\(String(self.merchantId))&StoreId=\(String(storeId))&Amount=\(String(format: "%.2f", amount.rounded(toPlaces: 2)))&ReferenceId=\(referenceId)&CheckSum=\(checkSum)") {
@@ -100,9 +100,9 @@ private protocol KPPaymentAppDelegate : NSObjectProtocol {
     }
 
     @objc public final func transactionStatusForReferenceId(_ referenceId: String, completionHandler: @escaping (_ payload: [String : String]) -> Void) {
-        var baseURL = "https://sandbox.kiplepay.com:94" // TODO: change to staging URL
+        var baseURL = "https://staging.kiplepay.com:94"
         if self.isProduction {
-            baseURL = "https://sandbox.kiplepay.com:94" // TODO: change to production URL
+            baseURL = "https://portal.kiplepay.com:94"
         }
         if let appURL = URL(string: "\(baseURL)/api/wallets/me/deeplink-payment/\(self.merchantId)/\(referenceId)") {
             var request = URLRequest(url: appURL)
@@ -216,14 +216,13 @@ private protocol KPPaymentAppDelegate : NSObjectProtocol {
             } else {
                 if let referenceId = self.referenceId {
                     self.referenceId = nil
-                    self.delegate?.paymentDidFinishSuccessfully(false, withMessage: "\((self.secret + String(self.merchantId) + storeId + amount + referenceId + transactionId + status)) \(checkSum) \(queryParams["CheckSum"])", andPayload: queryParams)
-//                    transactionStatusForReferenceId(referenceId) { (payload: [String : String]) in
-//                        if payload["Status"] == "Successful" {
-//                            self.delegate?.paymentDidFinishSuccessfully(true, withMessage: Constant.success, andPayload: payload)
-//                        } else {
-//                            self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.failed, andPayload: payload)
-//                        }
-//                    }
+                    transactionStatusForReferenceId(referenceId) { (payload: [String : String]) in
+                        if payload["Status"] == "Successful" {
+                            self.delegate?.paymentDidFinishSuccessfully(true, withMessage: Constant.success, andPayload: payload)
+                        } else {
+                            self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.failed, andPayload: payload)
+                        }
+                    }
                 } else {
                     self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.checkSumFailed, andPayload: queryParams)
                 }
