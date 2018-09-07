@@ -189,7 +189,8 @@ SWIFT_CLASS("_TtC12KPPaymentSDK9KPPayment")
 @interface KPPayment : NSObject
 @property (nonatomic, weak) id <KPPaymentDelegate> _Nullable delegate;
 - (nonnull instancetype)initWithMerchantId:(NSInteger)merchantId secret:(NSString * _Nonnull)secret isProduction:(BOOL)isProduction OBJC_DESIGNATED_INITIALIZER;
-- (void)makePaymentForStoreId:(NSInteger)storeId withReferenceId:(NSString * _Nonnull)referenceId andAmount:(float)amount;
+- (void)makePaymentForStoreId:(NSInteger)storeId withReferenceId:(NSString * _Nonnull)referenceId andAmount:(double)amount;
+- (void)transactionStatusForReferenceId:(NSString * _Nonnull)referenceId completionHandler:(void (^ _Nonnull)(NSDictionary<NSString *, NSString *> * _Nonnull))completionHandler;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
@@ -202,13 +203,13 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) KPPaymentApp
 + (KPPaymentApplicationDelegate * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
-- (BOOL)application:(UIApplication * _Nonnull)app open:(NSURL * _Nonnull)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> * _Nonnull)options SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)application:(UIApplication * _Nonnull)app open:(NSURL * _Nonnull)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> * _Nonnull)options;
 @end
 
 
 SWIFT_PROTOCOL("_TtP12KPPaymentSDK17KPPaymentDelegate_")
 @protocol KPPaymentDelegate
-- (void)paymentDidFinishSuccessfully:(BOOL)flag withMessage:(NSString * _Nonnull)message andPayload:(NSDictionary<NSString *, id> * _Nonnull)payload;
+- (void)paymentDidFinishSuccessfully:(BOOL)flag withMessage:(NSString * _Nonnull)message andPayload:(NSDictionary<NSString *, NSString *> * _Nonnull)payload;
 @end
 
 #if __has_attribute(external_source_symbol)

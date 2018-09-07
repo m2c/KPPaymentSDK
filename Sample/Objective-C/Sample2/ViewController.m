@@ -19,8 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    payment = [[KPPayment alloc] initWithMerchantId:3
-                                              secret:@"SECRET"
+    payment = [[KPPayment alloc] initWithMerchantId:48
+                                              secret:@"l43wrf8cai"
                                         isProduction:NO];
     payment.delegate = self;
 }
@@ -31,7 +31,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)paymentDidFinishSuccessfully:(BOOL)flag withMessage:(NSString *)message andPayload:(NSDictionary<NSString *,id> *)payload {
+- (void)paymentDidFinishSuccessfully:(BOOL)flag withMessage:(NSString *)message andPayload:(NSDictionary<NSString *,NSString *> *)payload {
     if (flag) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sample App" message:@"Payment is successful" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleCancel handler:nil];
@@ -46,8 +46,8 @@
 }
 
 - (IBAction)payButtonTapped:(id)sender {
-    [payment makePaymentForStoreId:4
-                    withReferenceId:@"UNIQUEREF2"
+    [payment makePaymentForStoreId:38
+                    withReferenceId:@"refBingo2"
                           andAmount:12.34];
 }
 

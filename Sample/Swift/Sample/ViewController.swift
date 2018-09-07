@@ -11,7 +11,7 @@ import KPPaymentSDK
 
 class ViewController: UIViewController, KPPaymentDelegate {
 
-    let payment = KPPayment(merchantId: 1, secret: "SECRET", isProduction: false)
+    let payment = KPPayment(merchantId: 48, secret: "l43wrf8cai", isProduction: false)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,10 +25,10 @@ class ViewController: UIViewController, KPPaymentDelegate {
     }
 
     @IBAction func payButtonTapped(_ sender: UIButton) {
-        self.payment.makePaymentForStoreId(2, withReferenceId: "UNIQUEREF1", andAmount: 12.34)
+        self.payment.makePaymentForStoreId(38, withReferenceId: "bingo8", andAmount: 12.34)
     }
 
-    func paymentDidFinishSuccessfully(_ flag: Bool, withMessage message: String, andPayload payload: [String : Any]) {
+    func paymentDidFinishSuccessfully(_ flag: Bool, withMessage message: String, andPayload payload: [String : String]) {
         if flag {
             let alert = UIAlertController(title: "Sample App", message: "Payment is successful", preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
