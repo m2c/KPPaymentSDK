@@ -25,10 +25,13 @@ class ViewController: UIViewController, KPPaymentDelegate {
     }
 
     @IBAction func payButtonTapped(_ sender: UIButton) {
-        self.payment.makePaymentForStoreId(38, withReferenceId: "bingo8", andAmount: 12.34)
+        self.payment.makePaymentForStoreId(38, withReferenceId: "bingo20", andAmount: 1.0)
     }
 
     func paymentDidFinishSuccessfully(_ flag: Bool, withMessage message: String, andPayload payload: [String : String]) {
+        print(#function)
+        print(payload["CheckSum"])
+        print(message)
         if flag {
             let alert = UIAlertController(title: "Sample App", message: "Payment is successful", preferredStyle: .alert)
             let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)

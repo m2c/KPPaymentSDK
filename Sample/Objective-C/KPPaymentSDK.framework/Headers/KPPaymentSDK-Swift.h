@@ -208,7 +208,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) KPPaymentApp
 
 
 SWIFT_PROTOCOL("_TtP12KPPaymentSDK17KPPaymentDelegate_")
-@protocol KPPaymentDelegate
+@protocol KPPaymentDelegate <NSObject>
 - (void)paymentDidFinishSuccessfully:(BOOL)flag withMessage:(NSString * _Nonnull)message andPayload:(NSDictionary<NSString *, NSString *> * _Nonnull)payload;
 @end
 

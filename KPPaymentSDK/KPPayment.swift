@@ -8,22 +8,22 @@
 
 import UIKit
 
-@objc public protocol KPPaymentDelegate: class {
+@objc public protocol KPPaymentDelegate : NSObjectProtocol {
     func paymentDidFinishSuccessfully(_ flag: Bool, withMessage message: String, andPayload payload: [String : String])
 }
 
-private protocol KPPaymentAppDelegate: class {
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any])
+private protocol KPPaymentAppDelegate : NSObjectProtocol {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
 }
 
-@objc public final class KPPaymentApplicationDelegate: NSObject {
+@objc public final class KPPaymentApplicationDelegate : NSObject {
     @objc public static let shared = KPPaymentApplicationDelegate()
 
     fileprivate weak var delegate: KPPaymentAppDelegate?
 
     private override init() {}
 
-    @objc @discardableResult public final func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
+    @objc @discardableResult public final func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
         guard let scheme = url.scheme else {
             return false
         }
@@ -38,7 +38,7 @@ private protocol KPPaymentAppDelegate: class {
     }
 }
 
-@objc public final class KPPayment: NSObject, KPPaymentAppDelegate {
+@objc public final class KPPayment : NSObject, KPPaymentAppDelegate {
     private let merchantId: Int
     private let secret: String
     private let isProduction: Bool
@@ -53,7 +53,7 @@ private protocol KPPaymentAppDelegate: class {
         static let unableRedirect = "Unable to redirect to kiplePay"
         static let success = "Successful"
         static let failed = "Unsuccessful payment from kiplePay"
-        static let noResponse = "No response from kiplePay"
+        static let noResponse = "Invalid response from kiplePay"
         static let invalidResponse = "Invalid response from kiplePay"
         static let checkSumFailed = "Check Sum failure"
     }
@@ -109,7 +109,7 @@ private protocol KPPaymentAppDelegate: class {
             request.httpMethod = "GET"
 
             let dataTask = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
-                var queryParams = [String: String]()
+                var queryParams = [String : String]()
                 if let e = error {
                     queryParams["Error"] = e.localizedDescription
                     DispatchQueue.main.async {
@@ -118,7 +118,7 @@ private protocol KPPaymentAppDelegate: class {
                     }
                 } else {
                     do {
-                        if let responseDictionary = try JSONSerialization.jsonObject(with: data!, options: []) as? [String: Any] {
+                        if let responseDictionary = try JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any] {
                             if !responseDictionary.isEmpty {
                                 if responseDictionary["Code"] as? String == "TRANSACTION_NOT_FOUND" {
                                     queryParams["Error"] = Constant.failed
@@ -179,7 +179,7 @@ private protocol KPPaymentAppDelegate: class {
             return
         }
 
-        var queryParams = [String: String]()
+        var queryParams = [String : String]()
         if let queryItems = components.queryItems {
             for queryItem: URLQueryItem in queryItems {
                 if queryItem.value == nil {
@@ -216,13 +216,14 @@ private protocol KPPaymentAppDelegate: class {
             } else {
                 if let referenceId = self.referenceId {
                     self.referenceId = nil
-                    transactionStatusForReferenceId(referenceId) { (payload: [String : String]) in
-                        if payload["Status"] == "Successful" {
-                            self.delegate?.paymentDidFinishSuccessfully(true, withMessage: Constant.success, andPayload: payload)
-                        } else {
-                            self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.failed, andPayload: payload)
-                        }
-                    }
+                    self.delegate?.paymentDidFinishSuccessfully(false, withMessage: "\((self.secret + String(self.merchantId) + storeId + amount + referenceId + transactionId + status)) \(checkSum) \(queryParams["CheckSum"])", andPayload: queryParams)
+//                    transactionStatusForReferenceId(referenceId) { (payload: [String : String]) in
+//                        if payload["Status"] == "Successful" {
+//                            self.delegate?.paymentDidFinishSuccessfully(true, withMessage: Constant.success, andPayload: payload)
+//                        } else {
+//                            self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.failed, andPayload: payload)
+//                        }
+//                    }
                 } else {
                     self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.checkSumFailed, andPayload: queryParams)
                 }
@@ -234,7 +235,7 @@ private protocol KPPaymentAppDelegate: class {
 }
 
 fileprivate extension Double {
-    func rounded(toPlaces places:Int) -> Double {
+    func rounded(toPlaces places: Int) -> Double {
         let divisor = pow(10.0, Double(places))
         return (self * divisor).rounded() / divisor
     }

@@ -20,8 +20,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     payment = [[KPPayment alloc] initWithMerchantId:48
-                                              secret:@"l43wrf8cai"
-                                        isProduction:NO];
+                                             secret:@"l43wrf8cai"
+                                       isProduction:NO];
     payment.delegate = self;
 }
 
@@ -47,8 +47,8 @@
 
 - (IBAction)payButtonTapped:(id)sender {
     [payment makePaymentForStoreId:38
-                    withReferenceId:@"refBingo2"
-                          andAmount:12.34];
+                   withReferenceId:@"refBingo3"
+                         andAmount:12.34];
 }
 
 @end
