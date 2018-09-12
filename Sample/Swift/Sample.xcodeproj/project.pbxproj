@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2E65940E213D10790072E2A8 /* KPPaymentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E65940D213D10790072E2A8 /* KPPaymentSDK.framework */; };
-		2E65940F213D10790072E2A8 /* KPPaymentSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2E65940D213D10790072E2A8 /* KPPaymentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2E884A542148BB3E00ACB78D /* KPPaymentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E884A532148BB3E00ACB78D /* KPPaymentSDK.framework */; };
+		2E884A552148BB3E00ACB78D /* KPPaymentSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2E884A532148BB3E00ACB78D /* KPPaymentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2E966ED421369A2000189858 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E966ED321369A2000189858 /* AppDelegate.swift */; };
 		2E966ED621369A2000189858 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E966ED521369A2000189858 /* ViewController.swift */; };
 		2E966ED921369A2000189858 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E966ED721369A2000189858 /* Main.storyboard */; };
@@ -23,7 +23,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				2E65940F213D10790072E2A8 /* KPPaymentSDK.framework in Embed Frameworks */,
+				2E884A552148BB3E00ACB78D /* KPPaymentSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -31,7 +31,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2E65940D213D10790072E2A8 /* KPPaymentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KPPaymentSDK.framework; sourceTree = "<group>"; };
+		2E884A532148BB3E00ACB78D /* KPPaymentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KPPaymentSDK.framework; sourceTree = "<group>"; };
 		2E966ED021369A2000189858 /* Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E966ED321369A2000189858 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E966ED521369A2000189858 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -46,7 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E65940E213D10790072E2A8 /* KPPaymentSDK.framework in Frameworks */,
+				2E884A542148BB3E00ACB78D /* KPPaymentSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,7 +56,7 @@
 		2E2F3E5F2138674300C563E3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2E65940D213D10790072E2A8 /* KPPaymentSDK.framework */,
+				2E884A532148BB3E00ACB78D /* KPPaymentSDK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

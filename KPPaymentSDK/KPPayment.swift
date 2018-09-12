@@ -58,6 +58,51 @@ private protocol KPPaymentAppDelegate : NSObjectProtocol {
         static let checkSumFailed = "Check Sum failure"
     }
 
+    @objc public enum KPPaymentStatus : Int {
+        case Successful
+        case Pending
+        case Failed
+        case Cancelled
+
+        public func toString() -> String {
+            switch self {
+            case .Successful:
+                return "Successful"
+            case .Pending:
+                return "Pending"
+            case .Failed:
+                return "Failed"
+            case .Cancelled:
+                return "Cancelled"
+            }
+        }
+
+        public static func status(fromString string: String) -> KPPaymentStatus? {
+            for c in KPPaymentStatus.allValues {
+                if c.toString() == string {
+                    return c
+                }
+            }
+            return nil
+        }
+
+        public static let allValues: [KPPaymentStatus] = {
+            var elements: [KPPaymentStatus] = []
+            for i in 0...KPPaymentStatus.count - 1 {
+                if let menu = KPPaymentStatus(rawValue: i) {
+                    elements.append(menu)
+                }
+            }
+            return elements
+        }()
+
+        private static let count: Int = {
+            var max: Int = 0
+            while let _ = KPPaymentStatus(rawValue: max) { max += 1 }
+            return max
+        }()
+    }
+
     @objc public init(merchantId: NSInteger, secret: String, isProduction: Bool) {
         self.merchantId = merchantId
         self.secret = secret
@@ -75,12 +120,19 @@ private protocol KPPaymentAppDelegate : NSObjectProtocol {
     @objc public final func makePaymentForStoreId(_ storeId: NSInteger, withReferenceId referenceId: String, andAmount amount: Double) {
         self.storeId = storeId
         self.referenceId = referenceId
-        var baseURL = "https://staging.webcash.com.my"
+        var baseURL = "https://sandbox.webcash.com.my"
         if self.isProduction {
             baseURL = "https://deeplink.kiplepay.com"
         }
-        let checkSum = (self.secret + String(self.merchantId) + String(storeId) + String(format: "%.2f", amount.rounded(toPlaces: 2)) + referenceId).sha1()
-        if let appURL = URL(string: "\(baseURL)/ios?MerchantId=\(String(self.merchantId))&StoreId=\(String(storeId))&Amount=\(String(format: "%.2f", amount.rounded(toPlaces: 2)))&ReferenceId=\(referenceId)&CheckSum=\(checkSum)") {
+
+        let param1 = self.secret
+        let param2 = String(self.merchantId)
+        let param3 = String(storeId)
+        let param4 = String(format: "%.2f", amount.rounded(toPlaces: 2))
+        let param5 = referenceId
+        let checkSum = (param1 + param2 + param3 + param4 + param5).sha1()
+
+        if let appURL = URL(string: "\(baseURL)/ios?MerchantId=\(param2)&StoreId=\(param3)&Amount=\(param4)&ReferenceId=\(param5)&CheckSum=\(checkSum)") {
             if #available(iOS 10.0, *) {
                 UIApplication.shared.open(appURL) { success in
                     if !success {
@@ -100,7 +152,7 @@ private protocol KPPaymentAppDelegate : NSObjectProtocol {
     }
 
     @objc public final func transactionStatusForReferenceId(_ referenceId: String, completionHandler: @escaping (_ payload: [String : String]) -> Void) {
-        var baseURL = "https://staging.kiplepay.com:94"
+        var baseURL = "https://sandbox.kiplepay.com:94"
         if self.isProduction {
             baseURL = "https://portal.kiplepay.com:94"
         }
@@ -165,7 +217,7 @@ private protocol KPPaymentAppDelegate : NSObjectProtocol {
         if let referenceId = self.referenceId {
             self.referenceId = nil
             transactionStatusForReferenceId(referenceId) { (payload: [String : String]) in
-                if payload["Status"] == "Successful" {
+                if payload["Status"] == KPPaymentStatus.Successful.toString() {
                     self.delegate?.paymentDidFinishSuccessfully(true, withMessage: Constant.success, andPayload: payload)
                 } else {
                     self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.failed, andPayload: payload)
@@ -192,16 +244,25 @@ private protocol KPPaymentAppDelegate : NSObjectProtocol {
             let referenceId = queryParams["ReferenceId"]!
             let transactionId = queryParams["TransactionId"]!
             let status = queryParams["Status"]!
-            let checkSum = (self.secret + String(self.merchantId) + storeId + amount + referenceId + transactionId + status).sha1()
+
+            let param1 = self.secret
+            let param2 = String(self.merchantId)
+            let param3 = storeId
+            let param4 = amount
+            let param5 = referenceId
+            let param6 = transactionId
+            let param7 = status
+            let checkSum = (param1 + param2 + param3 + param4 + param5 + param6 + param7).sha1()
+
             if queryParams["CheckSum"] == checkSum {
-                if queryParams["Status"] == "Successful" {
+                if queryParams["Status"] == KPPaymentStatus.Successful.toString() {
                     self.referenceId = nil
                     self.delegate?.paymentDidFinishSuccessfully(true, withMessage: Constant.success, andPayload: queryParams)
-                } else if queryParams["Status"] == "Pending" {
+                } else if queryParams["Status"] == KPPaymentStatus.Pending.toString() {
                     if let referenceId = self.referenceId {
                         self.referenceId = nil
                         transactionStatusForReferenceId(referenceId) { (payload: [String : String]) in
-                            if payload["Status"] == "Successful" {
+                            if payload["Status"] == KPPaymentStatus.Successful.toString() {
                                 self.delegate?.paymentDidFinishSuccessfully(true, withMessage: Constant.success, andPayload: payload)
                             } else {
                                 self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.failed, andPayload: payload)
@@ -217,7 +278,7 @@ private protocol KPPaymentAppDelegate : NSObjectProtocol {
                 if let referenceId = self.referenceId {
                     self.referenceId = nil
                     transactionStatusForReferenceId(referenceId) { (payload: [String : String]) in
-                        if payload["Status"] == "Successful" {
+                        if payload["Status"] == KPPaymentStatus.Successful.toString() {
                             self.delegate?.paymentDidFinishSuccessfully(true, withMessage: Constant.success, andPayload: payload)
                         } else {
                             self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.failed, andPayload: payload)
