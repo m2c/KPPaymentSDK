@@ -23,7 +23,7 @@ protocol _UInt8Type {}
 extension UInt8: _UInt8Type {}
 
 /** casting */
-extension UInt8 {
+internal extension UInt8 {
     /** cast because UInt8(<UInt32>) because std initializer crash if value is > byte */
     static func with(value: UInt64) -> UInt8 {
         let tmp = value & 0xff
@@ -42,7 +42,7 @@ extension UInt8 {
 }
 
 /** Bits */
-extension UInt8 {
+internal extension UInt8 {
     init(bits: [Bit]) {
         self.init(integerFrom(bits) as UInt8)
     }

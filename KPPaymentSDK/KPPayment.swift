@@ -12,43 +12,14 @@ import UIKit
     func paymentDidFinishSuccessfully(_ flag: Bool, withMessage message: String, andPayload payload: [String : String])
 }
 
-private protocol KPPaymentAppDelegate : NSObjectProtocol {
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
-}
-
-@objc public final class KPPaymentApplicationDelegate : NSObject {
-    @objc public static let shared = KPPaymentApplicationDelegate()
-
-    fileprivate weak var delegate: KPPaymentAppDelegate?
-
-    private override init() {}
-
-    @objc @discardableResult public final func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
-        guard let scheme = url.scheme else {
-            return false
-        }
-
-        let schemes = scheme.components(separatedBy: ".")
-
-        if schemes.first == "kiple" {
-            self.delegate?.application(app, open: url, options: options)
-            return true
-        }
-        return false
-    }
-}
-
 @objc public final class KPPayment : NSObject, KPPaymentAppDelegate {
-    private let merchantId: Int
-    private let secret: String
-    private let isProduction: Bool
-    private var storeId: Int?
-    private var referenceId: String?
-
-    @objc public weak var delegate: KPPaymentDelegate?
-
-    private struct Constant {
+    internal struct Constant {
         private init() {}
+
+        static let stagingPaymentBaseURL = "https://staging.webcash.com.my"
+        static let productionPaymentBaseURL = "https://deeplink.kiplepay.com"
+        static let stagingStatusBaseURL = "https://staging.kiplepay.com:94"
+        static let productionStatusBaseURL = "https://portal.kiplepay.com:94"
 
         static let unableRedirect = "Unable to redirect to kiplePay"
         static let success = "Successful"
@@ -58,50 +29,13 @@ private protocol KPPaymentAppDelegate : NSObjectProtocol {
         static let checkSumFailed = "Check Sum failure"
     }
 
-    @objc public enum KPPaymentStatus : Int {
-        case Successful
-        case Pending
-        case Failed
-        case Cancelled
+    internal let merchantId: Int
+    internal let secret: String
+    internal let isProduction: Bool
+    internal var storeId: Int?
+    internal var referenceId: String?
 
-        public func toString() -> String {
-            switch self {
-            case .Successful:
-                return "Successful"
-            case .Pending:
-                return "Pending"
-            case .Failed:
-                return "Failed"
-            case .Cancelled:
-                return "Cancelled"
-            }
-        }
-
-        public static func status(fromString string: String) -> KPPaymentStatus? {
-            for c in KPPaymentStatus.allValues {
-                if c.toString() == string {
-                    return c
-                }
-            }
-            return nil
-        }
-
-        public static let allValues: [KPPaymentStatus] = {
-            var elements: [KPPaymentStatus] = []
-            for i in 0...KPPaymentStatus.count - 1 {
-                if let menu = KPPaymentStatus(rawValue: i) {
-                    elements.append(menu)
-                }
-            }
-            return elements
-        }()
-
-        private static let count: Int = {
-            var max: Int = 0
-            while let _ = KPPaymentStatus(rawValue: max) { max += 1 }
-            return max
-        }()
-    }
+    @objc public weak var delegate: KPPaymentDelegate?
 
     @objc public init(merchantId: NSInteger, secret: String, isProduction: Bool) {
         self.merchantId = merchantId
@@ -117,116 +51,24 @@ private protocol KPPaymentAppDelegate : NSObjectProtocol {
         KPPaymentApplicationDelegate.shared.delegate = nil
     }
 
-    @objc public final func makePaymentForStoreId(_ storeId: NSInteger, withReferenceId referenceId: String, andAmount amount: Double) {
-        self.storeId = storeId
-        self.referenceId = referenceId
-        var baseURL = "https://sandbox.webcash.com.my"
-        if self.isProduction {
-            baseURL = "https://deeplink.kiplepay.com"
-        }
-
-        let param1 = self.secret
-        let param2 = String(self.merchantId)
-        let param3 = String(storeId)
-        let param4 = String(format: "%.2f", amount.rounded(toPlaces: 2))
-        let param5 = referenceId
-        let checkSum = (param1 + param2 + param3 + param4 + param5).sha1()
-
-        if let appURL = URL(string: "\(baseURL)/ios?MerchantId=\(param2)&StoreId=\(param3)&Amount=\(param4)&ReferenceId=\(param5)&CheckSum=\(checkSum)") {
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(appURL) { success in
-                    if !success {
-                        self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.unableRedirect, andPayload: [:])
-                    }
-                }
+    private final func triggerTransactionStatusForReferenceId(referenceId: String) {
+        self.referenceId = nil
+        transactionStatusForReferenceId(referenceId) { (payload: [String : String]) in
+            if payload["Status"] == KPPaymentStatus.Successful.toString() {
+                self.delegate?.paymentDidFinishSuccessfully(true, withMessage: Constant.success, andPayload: payload)
             } else {
-                if UIApplication.shared.canOpenURL(appURL) {
-                    UIApplication.shared.openURL(appURL)
-                } else {
-                    self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.unableRedirect, andPayload: [:])
-                }
+                self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.failed, andPayload: payload)
             }
-        } else {
-            self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.unableRedirect, andPayload: [:])
-        }
-    }
-
-    @objc public final func transactionStatusForReferenceId(_ referenceId: String, completionHandler: @escaping (_ payload: [String : String]) -> Void) {
-        var baseURL = "https://sandbox.kiplepay.com:94"
-        if self.isProduction {
-            baseURL = "https://portal.kiplepay.com:94"
-        }
-        if let appURL = URL(string: "\(baseURL)/api/wallets/me/deeplink-payment/\(self.merchantId)/\(referenceId)") {
-            var request = URLRequest(url: appURL)
-            request.httpMethod = "GET"
-
-            let dataTask = URLSession.shared.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
-                var queryParams = [String : String]()
-                if let e = error {
-                    queryParams["Error"] = e.localizedDescription
-                    DispatchQueue.main.async {
-                        completionHandler(queryParams)
-                        return
-                    }
-                } else {
-                    do {
-                        if let responseDictionary = try JSONSerialization.jsonObject(with: data!, options: []) as? [String : Any] {
-                            if !responseDictionary.isEmpty {
-                                if responseDictionary["Code"] as? String == "TRANSACTION_NOT_FOUND" {
-                                    queryParams["Error"] = Constant.failed
-                                } else {
-                                    queryParams["Status"] = responseDictionary["Status"] as? String
-                                    queryParams["Amount"] = responseDictionary["Amount"] as? String
-                                    queryParams["TransactionId"] = responseDictionary["TransactionId"] as? String
-                                    queryParams["TradeDate"] = responseDictionary["TradeDate"] as? String
-                                    queryParams["ReferenceId"] = referenceId
-                                    queryParams["StoreId"] = String(self.storeId ?? 0)
-                                }
-                                DispatchQueue.main.async {
-                                    completionHandler(queryParams)
-                                    return
-                                }
-                            } else {
-                                queryParams["Error"] = Constant.noResponse
-                                DispatchQueue.main.async {
-                                    completionHandler(queryParams)
-                                    return
-                                }
-                            }
-                        } else {
-                            queryParams["Error"] = Constant.invalidResponse
-                            DispatchQueue.main.async {
-                                completionHandler(queryParams)
-                                return
-                            }
-                        }
-                    } catch {
-                        queryParams["Error"] = Constant.invalidResponse
-                        DispatchQueue.main.async {
-                            completionHandler(queryParams)
-                            return
-                        }
-                    }
-                }
-            }
-            dataTask.resume()
         }
     }
 
     @objc private final func applicationDidBecomeActive(_ notification: Notification) {
         if let referenceId = self.referenceId {
-            self.referenceId = nil
-            transactionStatusForReferenceId(referenceId) { (payload: [String : String]) in
-                if payload["Status"] == KPPaymentStatus.Successful.toString() {
-                    self.delegate?.paymentDidFinishSuccessfully(true, withMessage: Constant.success, andPayload: payload)
-                } else {
-                    self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.failed, andPayload: payload)
-                }
-            }
+            triggerTransactionStatusForReferenceId(referenceId: referenceId)
         }
     }
 
-    fileprivate final func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) {
+    internal final func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) {
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
             return
         }
@@ -239,64 +81,47 @@ private protocol KPPaymentAppDelegate : NSObjectProtocol {
                 }
                 queryParams[queryItem.name] = queryItem.value
             }
-            let storeId = queryParams["StoreId"]!
-            let amount = queryParams["Amount"]!
-            let referenceId = queryParams["ReferenceId"]!
-            let transactionId = queryParams["TransactionId"]!
-            let status = queryParams["Status"]!
+            if let storeId = queryParams["StoreId"], let amount = queryParams["Amount"], let referenceId = queryParams["ReferenceId"], let transactionId = queryParams["TransactionId"], let status = queryParams["Status"] {
 
-            let param1 = self.secret
-            let param2 = String(self.merchantId)
-            let param3 = storeId
-            let param4 = amount
-            let param5 = referenceId
-            let param6 = transactionId
-            let param7 = status
-            let checkSum = (param1 + param2 + param3 + param4 + param5 + param6 + param7).sha1()
+                let param1 = self.secret
+                let param2 = String(self.merchantId)
+                let param3 = storeId
+                let param4 = amount
+                let param5 = referenceId
+                let param6 = transactionId
+                let param7 = status
+                let checkSum = (param1 + param2 + param3 + param4 + param5 + param6 + param7).sha1()
 
-            if queryParams["CheckSum"] == checkSum {
-                if queryParams["Status"] == KPPaymentStatus.Successful.toString() {
-                    self.referenceId = nil
-                    self.delegate?.paymentDidFinishSuccessfully(true, withMessage: Constant.success, andPayload: queryParams)
-                } else if queryParams["Status"] == KPPaymentStatus.Pending.toString() {
-                    if let referenceId = self.referenceId {
+                if queryParams["CheckSum"] == checkSum {
+                    if queryParams["Status"] == KPPaymentStatus.Successful.toString() {
                         self.referenceId = nil
-                        transactionStatusForReferenceId(referenceId) { (payload: [String : String]) in
-                            if payload["Status"] == KPPaymentStatus.Successful.toString() {
-                                self.delegate?.paymentDidFinishSuccessfully(true, withMessage: Constant.success, andPayload: payload)
-                            } else {
-                                self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.failed, andPayload: payload)
-                            }
+                        self.delegate?.paymentDidFinishSuccessfully(true, withMessage: Constant.success, andPayload: queryParams)
+                    } else if queryParams["Status"] == KPPaymentStatus.Pending.toString() {
+                        if let referenceId = self.referenceId {
+                            triggerTransactionStatusForReferenceId(referenceId: referenceId)
+                        } else {
+                            self.referenceId = nil
+                            self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.failed, andPayload: queryParams)
                         }
                     } else {
+                        self.referenceId = nil
                         self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.failed, andPayload: queryParams)
                     }
                 } else {
-                    self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.failed, andPayload: queryParams)
+                    if let referenceId = self.referenceId {
+                        triggerTransactionStatusForReferenceId(referenceId: referenceId)
+                    } else {
+                        self.referenceId = nil
+                        self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.checkSumFailed, andPayload: queryParams)
+                    }
                 }
             } else {
-                if let referenceId = self.referenceId {
-                    self.referenceId = nil
-                    transactionStatusForReferenceId(referenceId) { (payload: [String : String]) in
-                        if payload["Status"] == KPPaymentStatus.Successful.toString() {
-                            self.delegate?.paymentDidFinishSuccessfully(true, withMessage: Constant.success, andPayload: payload)
-                        } else {
-                            self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.failed, andPayload: payload)
-                        }
-                    }
-                } else {
-                    self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.checkSumFailed, andPayload: queryParams)
-                }
+                self.referenceId = nil
+                self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.failed, andPayload: queryParams)
             }
         } else {
+            self.referenceId = nil
             self.delegate?.paymentDidFinishSuccessfully(false, withMessage: Constant.noResponse, andPayload: [:])
         }
-    }
-}
-
-fileprivate extension Double {
-    func rounded(toPlaces places: Int) -> Double {
-        let divisor = pow(10.0, Double(places))
-        return (self * divisor).rounded() / divisor
     }
 }

@@ -189,11 +189,22 @@ SWIFT_CLASS("_TtC12KPPaymentSDK9KPPayment")
 @interface KPPayment : NSObject
 @property (nonatomic, weak) id <KPPaymentDelegate> _Nullable delegate;
 - (nonnull instancetype)initWithMerchantId:(NSInteger)merchantId secret:(NSString * _Nonnull)secret isProduction:(BOOL)isProduction OBJC_DESIGNATED_INITIALIZER;
-- (void)makePaymentForStoreId:(NSInteger)storeId withReferenceId:(NSString * _Nonnull)referenceId andAmount:(double)amount;
-- (void)transactionStatusForReferenceId:(NSString * _Nonnull)referenceId completionHandler:(void (^ _Nonnull)(NSDictionary<NSString *, NSString *> * _Nonnull))completionHandler;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
+
+
+@interface KPPayment (SWIFT_EXTENSION(KPPaymentSDK))
+- (void)makePaymentForStoreId:(NSInteger)storeId withReferenceId:(NSString * _Nonnull)referenceId andAmount:(double)amount;
+- (void)transactionStatusForReferenceId:(NSString * _Nonnull)referenceId completionHandler:(void (^ _Nonnull)(NSDictionary<NSString *, NSString *> * _Nonnull))completionHandler;
+@end
+
+typedef SWIFT_ENUM(NSInteger, KPPaymentStatus) {
+  KPPaymentStatusSuccessful = 0,
+  KPPaymentStatusPending = 1,
+  KPPaymentStatusFailed = 2,
+  KPPaymentStatusCancelled = 3,
+};
 
 @class UIApplication;
 

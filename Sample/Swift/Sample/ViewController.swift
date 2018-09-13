@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  Sample
 //
-//  Created by Zaid M. Said on 29/08/2018.
+//  Created by Zaid M. Said on 01/04/2018.
 //  Copyright © 2018 Kiple Sdn Bhd. All rights reserved.
 //
 
@@ -11,7 +11,7 @@ import KPPaymentSDK
 
 class ViewController: UIViewController, KPPaymentDelegate {
 
-    let payment = KPPayment(merchantId: 48, secret: "l43wrf8cai", isProduction: false)
+    let payment = KPPayment(merchantId: 141, secret: "l43wrf8cai", isProduction: false)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,7 @@ class ViewController: UIViewController, KPPaymentDelegate {
     }
 
     @IBAction func payButtonTapped(_ sender: UIButton) {
-        self.payment.makePaymentForStoreId(38, withReferenceId: "abc1234", andAmount: 12.34)
+        self.payment.makePaymentForStoreId(103, withReferenceId: "abc100", andAmount: 12.34)
     }
 
     func paymentDidFinishSuccessfully(_ flag: Bool, withMessage message: String, andPayload payload: [String : String]) {

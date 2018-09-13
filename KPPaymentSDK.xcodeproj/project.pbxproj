@@ -82,6 +82,8 @@
 		2E33C52E213836E2007FB33D /* KPPaymentSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E33C52D213836E2007FB33D /* KPPaymentSDKTests.swift */; };
 		2E33C530213836E2007FB33D /* KPPaymentSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 2E33C522213836E2007FB33D /* KPPaymentSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2E33C53A2138374B007FB33D /* KPPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E33C5392138374A007FB33D /* KPPayment.swift */; };
+		2E884A572148F4B300ACB78D /* KPPaymentApplicationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E884A562148F4B300ACB78D /* KPPaymentApplicationDelegate.swift */; };
+		2E884A592148F5FB00ACB78D /* KPPayment+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E884A582148F5FB00ACB78D /* KPPayment+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -173,6 +175,8 @@
 		2E33C52D213836E2007FB33D /* KPPaymentSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KPPaymentSDKTests.swift; sourceTree = "<group>"; };
 		2E33C52F213836E2007FB33D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E33C5392138374A007FB33D /* KPPayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KPPayment.swift; sourceTree = "<group>"; };
+		2E884A562148F4B300ACB78D /* KPPaymentApplicationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KPPaymentApplicationDelegate.swift; sourceTree = "<group>"; };
+		2E884A582148F5FB00ACB78D /* KPPayment+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KPPayment+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,7 +219,9 @@
 		2E33C521213836E2007FB33D /* KPPaymentSDK */ = {
 			isa = PBXGroup;
 			children = (
+				2E884A562148F4B300ACB78D /* KPPaymentApplicationDelegate.swift */,
 				2E33C5392138374A007FB33D /* KPPayment.swift */,
+				2E884A582148F5FB00ACB78D /* KPPayment+Extension.swift */,
 				2E33C522213836E2007FB33D /* KPPaymentSDK.h */,
 				2E33C523213836E2007FB33D /* Info.plist */,
 				2ECA6E05213D1A4A005DEE6E /* Crypto */,
@@ -423,6 +429,7 @@
 				2E2F3EC221386ACF00C563E3 /* Bit.swift in Sources */,
 				2E2F3F0B21386AFD00C563E3 /* PKCS7.swift in Sources */,
 				2E2F3ED221386ACF00C563E3 /* Cipher.swift in Sources */,
+				2E884A572148F4B300ACB78D /* KPPaymentApplicationDelegate.swift in Sources */,
 				2E2F3EEC21386AE800C563E3 /* OFB.swift in Sources */,
 				2E2F3ED921386ACF00C563E3 /* Rabbit.swift in Sources */,
 				2E2F3EEA21386AE800C563E3 /* BlockModeOptions.swift in Sources */,
@@ -457,6 +464,7 @@
 				2E2F3EFF21386AF300C563E3 /* Data+Extension.swift in Sources */,
 				2E2F3ECE21386ACF00C563E3 /* SHA1.swift in Sources */,
 				2E2F3EB121386ACF00C563E3 /* Authenticator.swift in Sources */,
+				2E884A592148F5FB00ACB78D /* KPPayment+Extension.swift in Sources */,
 				2E2F3EF021386AE800C563E3 /* CTR.swift in Sources */,
 				2E2F3ED121386ACF00C563E3 /* NoPadding.swift in Sources */,
 				2E2F3ED721386ACF00C563E3 /* HMAC.swift in Sources */,
