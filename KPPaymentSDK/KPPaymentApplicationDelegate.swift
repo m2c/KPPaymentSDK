@@ -9,7 +9,7 @@
 import UIKit
 
 internal protocol KPPaymentAppDelegate : NSObjectProtocol {
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any])
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any])
 }
 
 @objc public final class KPPaymentApplicationDelegate : NSObject {
@@ -19,7 +19,7 @@ internal protocol KPPaymentAppDelegate : NSObjectProtocol {
 
     private override init() {}
 
-    @objc @discardableResult public final func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) -> Bool {
+    @objc @discardableResult public final func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
         guard let scheme = url.scheme else {
             return false
         }
