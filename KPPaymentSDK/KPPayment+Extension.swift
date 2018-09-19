@@ -47,7 +47,7 @@ public extension KPPayment {
             return elements
         }()
 
-        private static let count: Int = {
+        public static let count: Int = {
             var max: Int = 0
             while let _ = KPPaymentStatus(rawValue: max) { max += 1 }
             return max

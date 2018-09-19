@@ -42,12 +42,12 @@ import UIKit
         self.secret = secret
         self.isProduction = isProduction
         super.init()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationDidBecomeActive(_:)), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.applicationDidBecomeActive(_:)), name: UIApplication.didBecomeActiveNotification, object: nil)
         KPPaymentApplicationDelegate.shared.delegate = self
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIApplication.didBecomeActiveNotification, object: nil)
         KPPaymentApplicationDelegate.shared.delegate = nil
     }
 
@@ -68,7 +68,7 @@ import UIKit
         }
     }
 
-    internal final func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any]) {
+    internal final func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) {
         guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
             return
         }
