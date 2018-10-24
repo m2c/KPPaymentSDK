@@ -19,8 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    payment = [[KPPayment alloc] initWithMerchantId:123
-                                             secret:@"abc123"
+    payment = [[KPPayment alloc] initWithMerchantId:141
+                                             secret:@"l43wrf8cai"
                                        isProduction:NO];
     payment.delegate = self;
 }
@@ -46,7 +46,8 @@
 }
 
 - (IBAction)payButtonTapped:(id)sender {
-    [payment makePaymentForStoreId:123
+    [payment makePaymentForStoreId:103
+                          withType:KPPaymentTypePayment
                    withReferenceId:@"abc123"
                          andAmount:12.34];
 }

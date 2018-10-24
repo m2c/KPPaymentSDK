@@ -193,11 +193,18 @@ SWIFT_CLASS("_TtC12KPPaymentSDK9KPPayment")
 + (nonnull instancetype)new SWIFT_DEPRECATED_MSG("-init is unavailable");
 @end
 
+enum KPPaymentType : NSInteger;
 
 @interface KPPayment (SWIFT_EXTENSION(KPPaymentSDK))
-- (void)makePaymentForStoreId:(NSInteger)storeId withReferenceId:(NSString * _Nonnull)referenceId andAmount:(double)amount;
+- (void)makePaymentForStoreId:(NSInteger)storeId withType:(enum KPPaymentType)type withReferenceId:(NSString * _Nonnull)referenceId andAmount:(double)amount;
 - (void)transactionStatusForReferenceId:(NSString * _Nonnull)referenceId completionHandler:(void (^ _Nonnull)(NSDictionary<NSString *, NSString *> * _Nonnull))completionHandler;
 @end
+
+typedef SWIFT_ENUM(NSInteger, KPPaymentType, closed) {
+  KPPaymentTypePayment = 0,
+  KPPaymentTypeMobileReload = 1,
+  KPPaymentTypePayBill = 2,
+};
 
 typedef SWIFT_ENUM(NSInteger, KPPaymentStatus, closed) {
   KPPaymentStatusSuccessful = 0,
