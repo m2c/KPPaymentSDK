@@ -9,6 +9,7 @@
 import Foundation
 
 struct Deeplink : Codable {
+    let type: Int?
     let merchantId: Int?
     let storeId: Int?
     let amount: Float?
@@ -18,7 +19,8 @@ struct Deeplink : Codable {
     let createAt: Date?
     var message: String?
 
-    init(merchantId: Int = 0, storeId: Int = 0, amount: Float = 0.0, referenceId: String = "", checkSum: String = "") {
+    init(type: Int = 0, merchantId: Int = 0, storeId: Int = 0, amount: Float = 0.0, referenceId: String = "", checkSum: String = "") {
+        self.type = type
         self.merchantId = merchantId
         self.storeId = storeId
         self.amount = amount
@@ -38,11 +40,15 @@ struct Deeplink : Codable {
         self.merchantId = nil
         self.storeId = nil
         self.amount = nil
+        self.type = nil
     }
 
     func toDictionary() -> [String: Any] {
         print(#function)
         var dictionary = [String: Any]()
+        if type != nil {
+            dictionary["Type"] = type
+        }
         if merchantId != nil {
             dictionary["MerchantId"] = merchantId
         }

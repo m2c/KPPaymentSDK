@@ -41,8 +41,10 @@ public class KPPayment: NSObject {
         let param3 = String(storeId)
         let param4 = String(format: "%.2f", amount.rounded(toPlaces: 2))
         let param5 = referenceId
-        let checkSum = (param1 + param2 + param3 + param4 + param5).sha1()
-        let deeplink = Deeplink(merchantId: self.merchantId, storeId: self.storeId, amount: amount, referenceId: referenceId, checkSum: checkSum)
+        let param6 = 0
+        let param7 = "Payment"
+        let checkSum = (param2 + param7 + param3 + param4 + param5 + param1).sha1()
+        let deeplink = Deeplink(type: param6, merchantId: self.merchantId, storeId: self.storeId, amount: amount, referenceId: referenceId, checkSum: checkSum)
         APIManager.shared.postGenerateDeeplink(deeplinkObj: deeplink, success: { (deeplinkModelObj: Deeplink) in
             print(deeplinkModelObj)
             if let appURLString = deeplinkModelObj.deeplinkURL, let appURL = URL(string: appURLString) {

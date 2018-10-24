@@ -13,7 +13,8 @@ struct Constant {
         static let failureDefault = "We're sorry, but something went wrong."
     }
 
-    static let generateDeeplinkURL = "https://sandbox.kiplepay.com:94/api/deeplinks/generate"
+//    static let generateDeeplinkURL = "https://sandbox.kiplepay.com:94/api/deeplinks/generate"
+    static let generateDeeplinkURL = "https://staging.kiplepay.com:94/api/deeplinks/generate"
 }
 
 extension String {

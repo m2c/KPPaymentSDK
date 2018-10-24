@@ -10,7 +10,10 @@ import UIKit
 
 class ViewController: UIViewController, KPPaymentDelegate {
 
-    let payment = KPPayment(merchantId: 48, storeId: 38, secret: "l43wrf8cai")
+    @IBOutlet weak var referenceIdTextField: UITextField!
+
+//        let payment = KPPayment(merchantId: 48, storeId: 38, secret: "l43wrf8cai") // sandbox
+    let payment = KPPayment(merchantId: 141, storeId: 103, secret: "l43wrf8cai") // staging
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +22,11 @@ class ViewController: UIViewController, KPPaymentDelegate {
     }
 
     @IBAction func payButtonTapped(_ sender: UIButton) {
-        self.payment.makePayment(referenceId: "3481", amount: 1.1)
+        self.payment.makePayment(referenceId: referenceIdTextField.text ?? "", amount: 1.1)
+    }
+
+    @IBAction func backgroundViewTapped(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
     }
 
     func paymentDidFinish(successfully flag: Bool, withMessage message: String) {

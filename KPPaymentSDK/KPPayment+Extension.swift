@@ -9,6 +9,52 @@
 import Foundation
 
 public extension KPPayment {
+    @objc public enum KPPaymentType : Int {
+        case Payment
+        case MobileReload
+        case PayBill
+
+        public func toString() -> String {
+            switch self {
+            case .Payment:
+                return "Payment"
+            case .MobileReload:
+                return "MobileReload"
+            case .PayBill:
+                return "PayBill"
+            }
+        }
+
+        public func toLowercasedString() -> String {
+            return self.toString().lowercased()
+        }
+
+        public static func status(fromString string: String) -> KPPaymentType? {
+            for c in KPPaymentType.allValues {
+                if c.toString() == string {
+                    return c
+                }
+            }
+            return nil
+        }
+
+        public static let allValues: [KPPaymentType] = {
+            var elements: [KPPaymentType] = []
+            for i in 0...KPPaymentType.count - 1 {
+                if let menu = KPPaymentType(rawValue: i) {
+                    elements.append(menu)
+                }
+            }
+            return elements
+        }()
+
+        public static let count: Int = {
+            var max: Int = 0
+            while let _ = KPPaymentType(rawValue: max) { max += 1 }
+            return max
+        }()
+    }
+
     @objc public enum KPPaymentStatus : Int {
         case Successful
         case Pending
@@ -54,9 +100,10 @@ public extension KPPayment {
         }()
     }
 
-    @objc public final func makePaymentForStoreId(_ storeId: NSInteger, withReferenceId referenceId: String, andAmount amount: Double) {
+    @objc public final func makePaymentForStoreId(_ storeId: NSInteger, withType type: KPPaymentType, withReferenceId referenceId: String, andAmount amount: Double) {
         self.storeId = storeId
         self.referenceId = referenceId
+        self.type = type
 
         let baseURL = self.isProduction ? Constant.productionPaymentBaseURL : Constant.stagingPaymentBaseURL
         let param1 = self.secret
@@ -64,9 +111,11 @@ public extension KPPayment {
         let param3 = String(storeId)
         let param4 = String(format: "%.2f", amount.rounded(toPlaces: 2))
         let param5 = referenceId
-        let checkSum = (param1 + param2 + param3 + param4 + param5).sha1()
+        let param6 = type.rawValue
+        let param7 = type.toString()
+        let checkSum = (param2 + param7 + param3 + param4 + param5 + param1).sha1()
 
-        if let appURL = URL(string: "\(baseURL)/ios?MerchantId=\(param2)&StoreId=\(param3)&Amount=\(param4)&ReferenceId=\(param5)&CheckSum=\(checkSum)") {
+        if let appURL = URL(string: "\(baseURL)/ios?MerchantId=\(param2)&StoreId=\(param3)&Amount=\(param4)&ReferenceId=\(param5)&CheckSum=\(checkSum)&Type=\(param6)") {
             if #available(iOS 10.0, *) {
                 UIApplication.shared.open(appURL) { success in
                     if !success {

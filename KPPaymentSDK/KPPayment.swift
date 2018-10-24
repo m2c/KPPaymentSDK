@@ -34,6 +34,7 @@ import UIKit
     internal let isProduction: Bool
     internal var storeId: Int?
     internal var referenceId: String?
+    internal var type: KPPaymentType?
 
     @objc public weak var delegate: KPPaymentDelegate?
 
