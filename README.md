@@ -33,7 +33,7 @@ import KPPaymentSDK
 
 class ViewController: UIViewController, KPPaymentDelegate {
 
-    let payment = KPPayment(merchantId: <YOUR_MERCHANT_ID>, secret: "<YOUR_SECRET>", isProduction: false)
+    private let payment = KPPayment(merchantId: <YOUR_MERCHANT_ID>, secret: "<YOUR_SECRET>", isProduction: false)
 
     override func viewDidLoad() {
         super.viewDidLoad()
