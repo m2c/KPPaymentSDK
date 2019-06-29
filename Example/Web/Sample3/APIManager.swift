@@ -37,11 +37,10 @@ struct APIManager {
         success: @escaping (_ deeplinkModelObj: Deeplink) -> Void,
         failure: @escaping (_ serverError: String) -> Void
         ) {
-        print(#function)
         let generateDeeplinkURLString = Constant.generateDeeplinkURL
         let headers = ["Content-Type": "application/json"]
         if let generateDeeplinkURL = URL(string: generateDeeplinkURLString) {
-            APIRequest.request(url: generateDeeplinkURL, method: .post, parameters: deeplinkObj.toDictionary(), headers: headers) { (response) in
+            APIWorker.request(url: generateDeeplinkURL, method: .post, parameters: deeplinkObj.toDictionary(), headers: headers) { (response) in
                 guard response.result.isSuccess else {
                     failure((response.result.error?.localizedDescription)!)
                     return

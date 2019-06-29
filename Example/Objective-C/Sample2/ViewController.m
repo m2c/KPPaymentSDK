@@ -67,7 +67,7 @@
 - (IBAction)payButtonTapped:(id)sender {
     [payment makePaymentForStoreId:103
                           withType:KPPaymentTypePayment
-                   withReferenceId:@"abc123"
+                   withReferenceId:@"abcd1234"
                          andAmount:12.34];
 }
 

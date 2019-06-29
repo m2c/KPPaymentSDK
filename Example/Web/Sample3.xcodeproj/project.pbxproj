@@ -15,7 +15,7 @@
 		2ED758E521771B7C008943AD /* KPPayment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED758E421771B7C008943AD /* KPPayment.swift */; };
 		2ED758E721771D68008943AD /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED758E621771D68008943AD /* APIManager.swift */; };
 		2ED758E921771DA0008943AD /* Deeplink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED758E821771DA0008943AD /* Deeplink.swift */; };
-		2ED758EB21771DF0008943AD /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED758EA21771DF0008943AD /* APIRequest.swift */; };
+		2ED758EB21771DF0008943AD /* APIWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED758EA21771DF0008943AD /* APIWorker.swift */; };
 		2ED758ED21771E35008943AD /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED758EC21771E35008943AD /* Constant.swift */; };
 		F28CD07E69C5654789809D04 /* Pods_Sample3.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0566CE81B1662662FFF0D866 /* Pods_Sample3.framework */; };
 /* End PBXBuildFile section */
@@ -32,7 +32,7 @@
 		2ED758E421771B7C008943AD /* KPPayment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KPPayment.swift; sourceTree = "<group>"; };
 		2ED758E621771D68008943AD /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		2ED758E821771DA0008943AD /* Deeplink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deeplink.swift; sourceTree = "<group>"; };
-		2ED758EA21771DF0008943AD /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
+		2ED758EA21771DF0008943AD /* APIWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIWorker.swift; sourceTree = "<group>"; };
 		2ED758EC21771E35008943AD /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		B10CB387E2A7A9AD28B249B5 /* Pods-Sample3.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample3.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Sample3/Pods-Sample3.debug.xcconfig"; sourceTree = "<group>"; };
 		FAB5ED1F0F99EF65D1E6BBBA /* Pods-Sample3.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample3.release.xcconfig"; path = "Pods/Target Support Files/Pods-Sample3/Pods-Sample3.release.xcconfig"; sourceTree = "<group>"; };
@@ -75,7 +75,7 @@
 				2ED758D4217716C2008943AD /* ViewController.swift */,
 				2ED758E421771B7C008943AD /* KPPayment.swift */,
 				2ED758E621771D68008943AD /* APIManager.swift */,
-				2ED758EA21771DF0008943AD /* APIRequest.swift */,
+				2ED758EA21771DF0008943AD /* APIWorker.swift */,
 				2ED758E821771DA0008943AD /* Deeplink.swift */,
 				2ED758EC21771E35008943AD /* Constant.swift */,
 				2ED758D6217716C2008943AD /* Main.storyboard */,
@@ -220,7 +220,7 @@
 				2ED758E721771D68008943AD /* APIManager.swift in Sources */,
 				2ED758D5217716C2008943AD /* ViewController.swift in Sources */,
 				2ED758E521771B7C008943AD /* KPPayment.swift in Sources */,
-				2ED758EB21771DF0008943AD /* APIRequest.swift in Sources */,
+				2ED758EB21771DF0008943AD /* APIWorker.swift in Sources */,
 				2ED758D3217716C2008943AD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

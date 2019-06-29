@@ -63,7 +63,6 @@ struct Deeplink : Codable {
     }
 
     func toDictionary() -> [String: Any] {
-        print(#function)
         var dictionary = [String: Any]()
         if type != nil {
             dictionary["Type"] = type
@@ -83,7 +82,6 @@ struct Deeplink : Codable {
         if checkSum != nil {
             dictionary["CheckSum"] = checkSum
         }
-        print(dictionary)
         return dictionary
     }
 }
