@@ -62,7 +62,7 @@ public extension KPPayment {
             return self.toString().lowercased()
         }
 
-        /// Init method to initialize payment type from string.
+        /// Implemented by subclasses to initialize a new enum object immediately after memory for it has been allocated, if able.
         ///
         /// - Parameter string: String representation of payment type.
         public init?(stringValue string: String) {
@@ -106,7 +106,7 @@ public extension KPPayment {
             }
         }
 
-        /// Init method to initialize payment status from string.
+        /// Implemented by subclasses to initialize a new enum object immediately after memory for it has been allocated, if able.
         ///
         /// - Parameter string: String representation of payment status.
         public init?(stringValue string: String) {
