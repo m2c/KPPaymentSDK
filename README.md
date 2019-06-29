@@ -2,7 +2,7 @@
 
 [![Swift 5](https://img.shields.io/badge/Swift-5-orange.svg?style=flat)](https://developer.apple.com/swift/)
 [![Platforms iOS](https://img.shields.io/badge/Platforms-iOS-lightgray.svg?style=flat)](http://www.apple.com/ios/)
-[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/KPPaymentSDK)
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage)
 [![Version](https://img.shields.io/cocoapods/v/KPPaymentSDK.svg?style=flat)](http://cocoapods.org/pods/KPPaymentSDK)
 [![License BSD](https://img.shields.io/badge/License-BSD-lightgrey.svg?style=flat)](https://opensource.org/licenses/BSD-3Clause)
 
