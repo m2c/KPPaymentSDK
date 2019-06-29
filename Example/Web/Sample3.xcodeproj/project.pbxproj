@@ -115,7 +115,6 @@
 				2ED758CC217716C2008943AD /* Frameworks */,
 				2ED758CD217716C2008943AD /* Resources */,
 				DAF73DAE0F6B80B19689DBB9 /* [CP] Embed Pods Frameworks */,
-				23E002A0CC9044C4843C3E7E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -173,25 +172,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		23E002A0CC9044C4843C3E7E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sample3/Pods-Sample3-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		34F4EF93D486918C341A968E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -216,7 +196,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Sample3/Pods-Sample3-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Sample3/Pods-Sample3-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -225,7 +205,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Sample3/Pods-Sample3-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Sample3/Pods-Sample3-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
