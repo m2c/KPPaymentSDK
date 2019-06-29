@@ -44,8 +44,8 @@ final class BlockEncryptor: Cryptor, Updatable {
         // Stream encrypts all, so it removes all elements
         accumulated.removeFirst(encrypted.count)
 
-        if var finalizingWorker = worker as? BlockModeWorkerFinalizing, isLast == true {
-            encrypted = try finalizingWorker.finalize(encrypt: encrypted.slice)
+        if var finalizingWorker = worker as? FinalizingEncryptModeWorker, isLast == true {
+            encrypted = Array(try finalizingWorker.finalize(encrypt: encrypted.slice))
         }
 
         return encrypted

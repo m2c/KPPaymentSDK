@@ -336,7 +336,7 @@ extension ChaCha20 {
 
 extension ChaCha20: Cryptors {
     //TODO: Use BlockEncryptor/BlockDecryptor
-    
+
     func makeEncryptor() -> Cryptor & Updatable {
         return ChaCha20.ChaChaEncryptor(chacha: self)
     }

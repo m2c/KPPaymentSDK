@@ -84,6 +84,8 @@
 		2E33C53A2138374B007FB33D /* KPPaymentSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E33C5392138374A007FB33D /* KPPaymentSDK.swift */; };
 		2E884A572148F4B300ACB78D /* KPPaymentApplicationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E884A562148F4B300ACB78D /* KPPaymentApplicationDelegate.swift */; };
 		2E884A592148F5FB00ACB78D /* KPPayment+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E884A582148F5FB00ACB78D /* KPPayment+Extension.swift */; };
+		B8328D2C22C7313300AE816A /* CBCMAC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8328D2B22C7313300AE816A /* CBCMAC.swift */; };
+		B8328D2E22C7317800AE816A /* StreamDecryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8328D2D22C7317700AE816A /* StreamDecryptor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,6 +179,8 @@
 		2E33C5392138374A007FB33D /* KPPaymentSDK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KPPaymentSDK.swift; sourceTree = "<group>"; };
 		2E884A562148F4B300ACB78D /* KPPaymentApplicationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KPPaymentApplicationDelegate.swift; sourceTree = "<group>"; };
 		2E884A582148F5FB00ACB78D /* KPPayment+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KPPayment+Extension.swift"; sourceTree = "<group>"; };
+		B8328D2B22C7313300AE816A /* CBCMAC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CBCMAC.swift; sourceTree = "<group>"; };
+		B8328D2D22C7317700AE816A /* StreamDecryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamDecryptor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,6 +255,7 @@
 				2E2F3E8C21386ACC00C563E3 /* Checksum.swift */,
 				2E2F3EA521386ACE00C563E3 /* Cipher.swift */,
 				2E2F3E9D21386ACD00C563E3 /* CMAC.swift */,
+				B8328D2B22C7313300AE816A /* CBCMAC.swift */,
 				2E2F3E8E21386ACC00C563E3 /* Collection+Extension.swift */,
 				2E2F3E8821386ACB00C563E3 /* CompactMap.swift */,
 				2E2F3E8621386ACB00C563E3 /* Cryptor.swift */,
@@ -272,6 +277,7 @@
 				2E2F3EA121386ACE00C563E3 /* SHA1.swift */,
 				2E2F3EAE21386ACF00C563E3 /* SHA2.swift */,
 				2E2F3E8321386ACB00C563E3 /* SHA3.swift */,
+				B8328D2D22C7317700AE816A /* StreamDecryptor.swift */,
 				2E2F3E9121386ACC00C563E3 /* StreamEncryptor.swift */,
 				2E2F3E9621386ACC00C563E3 /* String+Extension.swift */,
 				2E2F3E9B21386ACD00C563E3 /* UInt8+Extension.swift */,
@@ -443,6 +449,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8328D2E22C7317800AE816A /* StreamDecryptor.swift in Sources */,
 				2E2F3EB521386ACF00C563E3 /* CompactMap.swift in Sources */,
 				2E2F3EC221386ACF00C563E3 /* Bit.swift in Sources */,
 				2E2F3F0B21386AFD00C563E3 /* PKCS7.swift in Sources */,
@@ -502,6 +509,7 @@
 				2E2F3ECD21386ACF00C563E3 /* SecureBytes.swift in Sources */,
 				2E2F3EEE21386AE800C563E3 /* CFB.swift in Sources */,
 				2E2F3EFE21386AF300C563E3 /* HMAC+Foundation.swift in Sources */,
+				B8328D2C22C7313300AE816A /* CBCMAC.swift in Sources */,
 				2E2F3EDE21386ADE00C563E3 /* AEADChaCha20Poly1305.swift in Sources */,
 				2E2F3EBC21386ACF00C563E3 /* Updatable.swift in Sources */,
 				2E2F3F0221386AF300C563E3 /* Blowfish+Foundation.swift in Sources */,

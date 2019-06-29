@@ -13,7 +13,7 @@
 //  - This notice may not be removed or altered from any source or binary distribution.
 //
 
-@available(*, deprecated, renamed: "Digest")
+@available(*, renamed: "Digest")
 typealias Hash = Digest
 
 /// Hash functions to calculate Digest.

@@ -156,7 +156,7 @@ final class Checksum {
     }
 }
 
-// MARK: interface
+// MARK: Public interface
 
 extension Checksum {
     /// Calculate CRC32.
