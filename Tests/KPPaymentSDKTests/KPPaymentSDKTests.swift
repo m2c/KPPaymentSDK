@@ -50,18 +50,16 @@ final class KPPaymentSDKTests: XCTestCase {
 
     func testMakePayment() {
         // given
-        let expectedResult = true
-        let storeID = 103
-        let paymentType: KPPayment.KPPaymentType = .Payment
-        let referenceId = "abcd\(Int(arc4random_uniform(UInt32(9999))))"
-        let amount = 12.34
+        let expectedResult = "https://staging.webcash.com.my/ios?MerchantId=141&StoreId=103&Amount=12.34&ReferenceId=abcd1234&CheckSum=8babc37e8823a2aa40d8cc3cf4ab83bb4362796f&Type=0"
 
         // when
-        self.sut.makePaymentForStoreId(storeID, withType: paymentType, withReferenceId: referenceId, andAmount: amount)
-        let actualResult = self.engineSpy.openURLCalled
+        self.sut.makePaymentForStoreId(103, withType: .Payment, withReferenceId: "abcd1234", andAmount: 12.34)
+        let openURLCalled = self.engineSpy.openURLCalled
+        let actualResult = self.engineSpy.openURLValue.absoluteString
 
         // then
-        XCTAssertEqual(actualResult, expectedResult, "makePayment should make payment")
+        XCTAssertTrue(openURLCalled, "make payment should open kiplePay App")
+        XCTAssertEqual(actualResult, expectedResult, "make payment should pass correct parameter to kiplePay App")
     }
 
     static var allTests = [
