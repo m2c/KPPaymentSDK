@@ -31,13 +31,17 @@ internal protocol KPPaymentAppDelegate : NSObjectProtocol {
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any])
 }
 
+/// A payment delegate object to interface with UIApplication.
 @objc public final class KPPaymentApplicationDelegate : NSObject {
+
+    /// Returns the singleton payment delegate object.
     @objc public static let shared = KPPaymentApplicationDelegate()
 
     internal weak var delegate: KPPaymentAppDelegate?
 
     private override init() {}
 
+    /// Method to listen to deeplink integration.
     @objc @discardableResult public final func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
         guard let scheme = url.scheme else {
             return false

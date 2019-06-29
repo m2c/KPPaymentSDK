@@ -28,11 +28,22 @@
 import UIKit
 
 public extension KPPayment {
+
+    /// Specifies the payment type of a payment object.
     @objc enum KPPaymentType : Int, CaseIterable {
+
+        /// Represents payment.
         case Payment
+
+        /// Represents mobile reload payment type.
         case MobileReload
+
+        /// Represents pay bill payment type.
         case PayBill
 
+        /// Method to convert enum type to string type.
+        ///
+        /// - Returns: String representation of payment type.
         public func toString() -> String {
             switch self {
             case .Payment:
@@ -44,10 +55,17 @@ public extension KPPayment {
             }
         }
 
+        /// Method to convert enum type to lowercased string type.
+        ///
+        /// - Returns: Lowercased string representation of payment type.
         public func toLowercasedString() -> String {
             return self.toString().lowercased()
         }
 
+        /// Init method to initialize payment type from string.
+        ///
+        /// - Parameter string: String representation of payment type.
+        /// - Returns: Payment type enum object.
         public static func type(stringValue string: String) -> KPPaymentType? {
             for c in KPPaymentType.allCases {
                 if c.toString() == string {
@@ -58,12 +76,24 @@ public extension KPPayment {
         }
     }
 
+    /// Specifies the payment status of a payment object.
     @objc enum KPPaymentStatus : Int, CaseIterable {
+
+        /// Represents successful transaction.
         case Successful
+
+        /// Represents pending transaction.
         case Pending
+
+        /// Represents failed transaction.
         case Failed
+
+        /// Represents cancelled transaction.
         case Cancelled
 
+        /// Method to convert enum type to string type.
+        ///
+        /// - Returns: String representation of payment status.
         public func toString() -> String {
             switch self {
             case .Successful:
@@ -77,6 +107,10 @@ public extension KPPayment {
             }
         }
 
+        /// Init method to initialize payment status from string.
+        ///
+        /// - Parameter string: String representation of payment status.
+        /// - Returns: Payment status enum object.
         public static func status(stringValue string: String) -> KPPaymentStatus? {
             for c in KPPaymentStatus.allCases {
                 if c.toString() == string {
@@ -87,6 +121,13 @@ public extension KPPayment {
         }
     }
 
+    /// Method that will perform transaction with kiplePay's App. Will redirect to kiplePay App if installed.
+    ///
+    /// - Parameters:
+    ///   - storeId: kiplePay's storeId.
+    ///   - type: The payment type enum.
+    ///   - referenceId: Unique referenceId generated from sender to keep track of transaction details.
+    ///   - amount: Double representation of transation amount (will be rounded to two decimal places).
     @objc final func makePaymentForStoreId(_ storeId: NSInteger, withType type: KPPaymentType, withReferenceId referenceId: String, andAmount amount: Double) {
         self.storeId = storeId
         self.referenceId = referenceId
@@ -113,6 +154,17 @@ public extension KPPayment {
         }
     }
 
+    /// Method that will check transaction details based on referenceId.
+    ///
+    /// - Parameters:
+    ///   - referenceId: Unique referenceId generated from sender to keep track of transaction details.
+    ///   - completionHandler: The block to execute with the results.
+    ///                        Provide a value for this parameter if you want to inspect the payload of the transaction details.
+    ///                        This block is executed asynchronously on your app's main thread.
+    ///                        The block has no return value and takes the following parameter:
+    ///   - payload: A string valued dictionary of the transaction details based on referenceId.
+    ///              The key for the dictionary are if unsuccessful: Error; if successful:
+    ///              Status, Amount, TransactionId, TradeDate, ReferenceId, StoreId.
     @objc final func transactionStatusForReferenceId(_ referenceId: String, completionHandler: @escaping (_ payload: [String : String]) -> Void) {
         let baseURL = self.isProduction ? Constant.productionStatusBaseURL : Constant.stagingStatusBaseURL
         if let appURL = URL(string: "\(baseURL)/api/wallets/me/deeplink-payment/\(self.merchantId)/\(referenceId)") {

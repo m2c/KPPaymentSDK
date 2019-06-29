@@ -27,10 +27,12 @@
 
 import UIKit
 
+/// A set of methods implemented by the delegate of a payment object to post transaction.
 @objc public protocol KPPaymentDelegate : NSObjectProtocol {
     func paymentDidFinishSuccessfully(_ flag: Bool, withMessage message: String, andPayload payload: [String : String])
 }
 
+/// A payment object to interface with kiplePay's App.
 @objc public final class KPPayment : NSObject, KPPaymentAppDelegate {
     internal struct Constant {
         private init() {}
@@ -56,8 +58,15 @@ import UIKit
     internal var type: KPPaymentType?
     internal var engine: URLEngine.Type
 
+    /// The object that acts as the delegate of the payment object.
     @objc public weak var delegate: KPPaymentDelegate?
 
+    /// Implemented by subclasses to initialize a new object (the receiver) immediately after memory for it has been allocated.
+    ///
+    /// - Parameters:
+    ///   - merchantId: kiplePay's merchantId.
+    ///   - secret: Merchant's private key for check sum validation.
+    ///   - isProduction: Flag to indicate live or staging server endpoint.
     @objc public init(merchantId: NSInteger, secret: String, isProduction: Bool) {
         self.merchantId = merchantId
         self.secret = secret
