@@ -30,12 +30,12 @@ import KPPaymentSDK
 
 class ViewController: UIViewController, KPPaymentDelegate {
 
-    let payment = KPPayment(merchantId: 141, secret: "l43wrf8cai", isProduction: false)
+    private let payment = KPPayment(merchantId: 141, secret: "l43wrf8cai", isProduction: false)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        payment.delegate = self
+        self.payment.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
