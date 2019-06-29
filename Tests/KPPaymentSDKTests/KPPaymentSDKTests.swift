@@ -63,7 +63,7 @@ final class KPPaymentSDKTests: XCTestCase {
     }
 
     static var allTests = [
-        ("testExample", testMakePayment),
+        ("testMakePayment", testMakePayment),
     ]
 }
 
