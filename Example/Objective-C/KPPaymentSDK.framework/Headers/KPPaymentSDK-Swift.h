@@ -194,9 +194,18 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 @protocol KPPaymentDelegate;
 
+/// A payment object to interface with kiplePay’s App.
 SWIFT_CLASS("_TtC12KPPaymentSDK9KPPayment")
 @interface KPPayment : NSObject
+/// The object that acts as the delegate of the payment object.
 @property (nonatomic, weak) id <KPPaymentDelegate> _Nullable delegate;
+/// Implemented by subclasses to initialize a new object (the receiver) immediately after memory for it has been allocated.
+/// \param merchantId kiplePay’s merchantId.
+///
+/// \param secret Merchant’s private key for check sum validation.
+///
+/// \param isProduction Flag to indicate live or staging server endpoint.
+///
 - (nonnull instancetype)initWithMerchantId:(NSInteger)merchantId secret:(NSString * _Nonnull)secret isProduction:(BOOL)isProduction OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -205,35 +214,69 @@ SWIFT_CLASS("_TtC12KPPaymentSDK9KPPayment")
 enum KPPaymentType : NSInteger;
 
 @interface KPPayment (SWIFT_EXTENSION(KPPaymentSDK))
+/// Method that will perform transaction with kiplePay’s App. Will redirect to kiplePay App if installed.
+/// \param storeId kiplePay’s storeId.
+///
+/// \param type The payment type enum.
+///
+/// \param referenceId Unique referenceId generated from sender to keep track of transaction details.
+///
+/// \param amount Double representation of transation amount (will be rounded to two decimal places).
+///
 - (void)makePaymentForStoreId:(NSInteger)storeId withType:(enum KPPaymentType)type withReferenceId:(NSString * _Nonnull)referenceId andAmount:(double)amount;
+/// Method that will check transaction details based on referenceId.
+/// \param referenceId Unique referenceId generated from sender to keep track of transaction details.
+///
+/// \param completionHandler The block to execute with the results.
+/// Provide a value for this parameter if you want to inspect the payload of the transaction details.
+/// This block is executed asynchronously on your app’s main thread.
+/// The block has no return value and takes the following parameter:
+///
+/// \param payload A string valued dictionary of the transaction details based on referenceId.
+/// The key for the dictionary are if unsuccessful: Error; if successful:
+/// Status, Amount, TransactionId, TradeDate, ReferenceId, StoreId.
+///
 - (void)transactionStatusForReferenceId:(NSString * _Nonnull)referenceId completionHandler:(void (^ _Nonnull)(NSDictionary<NSString *, NSString *> * _Nonnull))completionHandler;
 @end
 
+/// Specifies the payment type of a payment object.
 typedef SWIFT_ENUM(NSInteger, KPPaymentType, closed) {
+/// Represents payment.
   KPPaymentTypePayment = 0,
+/// Represents mobile reload payment type.
   KPPaymentTypeMobileReload = 1,
+/// Represents pay bill payment type.
   KPPaymentTypePayBill = 2,
 };
 
+/// Specifies the payment status of a payment object.
 typedef SWIFT_ENUM(NSInteger, KPPaymentStatus, closed) {
+/// Represents successful transaction.
   KPPaymentStatusSuccessful = 0,
+/// Represents pending transaction.
   KPPaymentStatusPending = 1,
+/// Represents failed transaction.
   KPPaymentStatusFailed = 2,
+/// Represents cancelled transaction.
   KPPaymentStatusCancelled = 3,
 };
 
 @class UIApplication;
 
+/// A payment delegate object to interface with UIApplication.
 SWIFT_CLASS("_TtC12KPPaymentSDK28KPPaymentApplicationDelegate")
 @interface KPPaymentApplicationDelegate : NSObject
+/// Returns the singleton payment delegate object.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) KPPaymentApplicationDelegate * _Nonnull shared;)
 + (KPPaymentApplicationDelegate * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+/// Method to listen to deeplink integration.
 - (BOOL)application:(UIApplication * _Nonnull)app open:(NSURL * _Nonnull)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> * _Nonnull)options;
 @end
 
 
+/// A set of methods implemented by the delegate of a payment object to post transaction.
 SWIFT_PROTOCOL("_TtP12KPPaymentSDK17KPPaymentDelegate_")
 @protocol KPPaymentDelegate <NSObject>
 - (void)paymentDidFinishSuccessfully:(BOOL)flag withMessage:(NSString * _Nonnull)message andPayload:(NSDictionary<NSString *, NSString *> * _Nonnull)payload;
@@ -435,9 +478,18 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 @protocol KPPaymentDelegate;
 
+/// A payment object to interface with kiplePay’s App.
 SWIFT_CLASS("_TtC12KPPaymentSDK9KPPayment")
 @interface KPPayment : NSObject
+/// The object that acts as the delegate of the payment object.
 @property (nonatomic, weak) id <KPPaymentDelegate> _Nullable delegate;
+/// Implemented by subclasses to initialize a new object (the receiver) immediately after memory for it has been allocated.
+/// \param merchantId kiplePay’s merchantId.
+///
+/// \param secret Merchant’s private key for check sum validation.
+///
+/// \param isProduction Flag to indicate live or staging server endpoint.
+///
 - (nonnull instancetype)initWithMerchantId:(NSInteger)merchantId secret:(NSString * _Nonnull)secret isProduction:(BOOL)isProduction OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -446,35 +498,69 @@ SWIFT_CLASS("_TtC12KPPaymentSDK9KPPayment")
 enum KPPaymentType : NSInteger;
 
 @interface KPPayment (SWIFT_EXTENSION(KPPaymentSDK))
+/// Method that will perform transaction with kiplePay’s App. Will redirect to kiplePay App if installed.
+/// \param storeId kiplePay’s storeId.
+///
+/// \param type The payment type enum.
+///
+/// \param referenceId Unique referenceId generated from sender to keep track of transaction details.
+///
+/// \param amount Double representation of transation amount (will be rounded to two decimal places).
+///
 - (void)makePaymentForStoreId:(NSInteger)storeId withType:(enum KPPaymentType)type withReferenceId:(NSString * _Nonnull)referenceId andAmount:(double)amount;
+/// Method that will check transaction details based on referenceId.
+/// \param referenceId Unique referenceId generated from sender to keep track of transaction details.
+///
+/// \param completionHandler The block to execute with the results.
+/// Provide a value for this parameter if you want to inspect the payload of the transaction details.
+/// This block is executed asynchronously on your app’s main thread.
+/// The block has no return value and takes the following parameter:
+///
+/// \param payload A string valued dictionary of the transaction details based on referenceId.
+/// The key for the dictionary are if unsuccessful: Error; if successful:
+/// Status, Amount, TransactionId, TradeDate, ReferenceId, StoreId.
+///
 - (void)transactionStatusForReferenceId:(NSString * _Nonnull)referenceId completionHandler:(void (^ _Nonnull)(NSDictionary<NSString *, NSString *> * _Nonnull))completionHandler;
 @end
 
+/// Specifies the payment type of a payment object.
 typedef SWIFT_ENUM(NSInteger, KPPaymentType, closed) {
+/// Represents payment.
   KPPaymentTypePayment = 0,
+/// Represents mobile reload payment type.
   KPPaymentTypeMobileReload = 1,
+/// Represents pay bill payment type.
   KPPaymentTypePayBill = 2,
 };
 
+/// Specifies the payment status of a payment object.
 typedef SWIFT_ENUM(NSInteger, KPPaymentStatus, closed) {
+/// Represents successful transaction.
   KPPaymentStatusSuccessful = 0,
+/// Represents pending transaction.
   KPPaymentStatusPending = 1,
+/// Represents failed transaction.
   KPPaymentStatusFailed = 2,
+/// Represents cancelled transaction.
   KPPaymentStatusCancelled = 3,
 };
 
 @class UIApplication;
 
+/// A payment delegate object to interface with UIApplication.
 SWIFT_CLASS("_TtC12KPPaymentSDK28KPPaymentApplicationDelegate")
 @interface KPPaymentApplicationDelegate : NSObject
+/// Returns the singleton payment delegate object.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) KPPaymentApplicationDelegate * _Nonnull shared;)
 + (KPPaymentApplicationDelegate * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+/// Method to listen to deeplink integration.
 - (BOOL)application:(UIApplication * _Nonnull)app open:(NSURL * _Nonnull)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> * _Nonnull)options;
 @end
 
 
+/// A set of methods implemented by the delegate of a payment object to post transaction.
 SWIFT_PROTOCOL("_TtP12KPPaymentSDK17KPPaymentDelegate_")
 @protocol KPPaymentDelegate <NSObject>
 - (void)paymentDidFinishSuccessfully:(BOOL)flag withMessage:(NSString * _Nonnull)message andPayload:(NSDictionary<NSString *, NSString *> * _Nonnull)payload;
@@ -680,9 +766,18 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 @protocol KPPaymentDelegate;
 
+/// A payment object to interface with kiplePay’s App.
 SWIFT_CLASS("_TtC12KPPaymentSDK9KPPayment")
 @interface KPPayment : NSObject
+/// The object that acts as the delegate of the payment object.
 @property (nonatomic, weak) id <KPPaymentDelegate> _Nullable delegate;
+/// Implemented by subclasses to initialize a new object (the receiver) immediately after memory for it has been allocated.
+/// \param merchantId kiplePay’s merchantId.
+///
+/// \param secret Merchant’s private key for check sum validation.
+///
+/// \param isProduction Flag to indicate live or staging server endpoint.
+///
 - (nonnull instancetype)initWithMerchantId:(NSInteger)merchantId secret:(NSString * _Nonnull)secret isProduction:(BOOL)isProduction OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -691,35 +786,69 @@ SWIFT_CLASS("_TtC12KPPaymentSDK9KPPayment")
 enum KPPaymentType : NSInteger;
 
 @interface KPPayment (SWIFT_EXTENSION(KPPaymentSDK))
+/// Method that will perform transaction with kiplePay’s App. Will redirect to kiplePay App if installed.
+/// \param storeId kiplePay’s storeId.
+///
+/// \param type The payment type enum.
+///
+/// \param referenceId Unique referenceId generated from sender to keep track of transaction details.
+///
+/// \param amount Double representation of transation amount (will be rounded to two decimal places).
+///
 - (void)makePaymentForStoreId:(NSInteger)storeId withType:(enum KPPaymentType)type withReferenceId:(NSString * _Nonnull)referenceId andAmount:(double)amount;
+/// Method that will check transaction details based on referenceId.
+/// \param referenceId Unique referenceId generated from sender to keep track of transaction details.
+///
+/// \param completionHandler The block to execute with the results.
+/// Provide a value for this parameter if you want to inspect the payload of the transaction details.
+/// This block is executed asynchronously on your app’s main thread.
+/// The block has no return value and takes the following parameter:
+///
+/// \param payload A string valued dictionary of the transaction details based on referenceId.
+/// The key for the dictionary are if unsuccessful: Error; if successful:
+/// Status, Amount, TransactionId, TradeDate, ReferenceId, StoreId.
+///
 - (void)transactionStatusForReferenceId:(NSString * _Nonnull)referenceId completionHandler:(void (^ _Nonnull)(NSDictionary<NSString *, NSString *> * _Nonnull))completionHandler;
 @end
 
+/// Specifies the payment type of a payment object.
 typedef SWIFT_ENUM(NSInteger, KPPaymentType, closed) {
+/// Represents payment.
   KPPaymentTypePayment = 0,
+/// Represents mobile reload payment type.
   KPPaymentTypeMobileReload = 1,
+/// Represents pay bill payment type.
   KPPaymentTypePayBill = 2,
 };
 
+/// Specifies the payment status of a payment object.
 typedef SWIFT_ENUM(NSInteger, KPPaymentStatus, closed) {
+/// Represents successful transaction.
   KPPaymentStatusSuccessful = 0,
+/// Represents pending transaction.
   KPPaymentStatusPending = 1,
+/// Represents failed transaction.
   KPPaymentStatusFailed = 2,
+/// Represents cancelled transaction.
   KPPaymentStatusCancelled = 3,
 };
 
 @class UIApplication;
 
+/// A payment delegate object to interface with UIApplication.
 SWIFT_CLASS("_TtC12KPPaymentSDK28KPPaymentApplicationDelegate")
 @interface KPPaymentApplicationDelegate : NSObject
+/// Returns the singleton payment delegate object.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) KPPaymentApplicationDelegate * _Nonnull shared;)
 + (KPPaymentApplicationDelegate * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+/// Method to listen to deeplink integration.
 - (BOOL)application:(UIApplication * _Nonnull)app open:(NSURL * _Nonnull)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> * _Nonnull)options;
 @end
 
 
+/// A set of methods implemented by the delegate of a payment object to post transaction.
 SWIFT_PROTOCOL("_TtP12KPPaymentSDK17KPPaymentDelegate_")
 @protocol KPPaymentDelegate <NSObject>
 - (void)paymentDidFinishSuccessfully:(BOOL)flag withMessage:(NSString * _Nonnull)message andPayload:(NSDictionary<NSString *, NSString *> * _Nonnull)payload;
@@ -921,9 +1050,18 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 @protocol KPPaymentDelegate;
 
+/// A payment object to interface with kiplePay’s App.
 SWIFT_CLASS("_TtC12KPPaymentSDK9KPPayment")
 @interface KPPayment : NSObject
+/// The object that acts as the delegate of the payment object.
 @property (nonatomic, weak) id <KPPaymentDelegate> _Nullable delegate;
+/// Implemented by subclasses to initialize a new object (the receiver) immediately after memory for it has been allocated.
+/// \param merchantId kiplePay’s merchantId.
+///
+/// \param secret Merchant’s private key for check sum validation.
+///
+/// \param isProduction Flag to indicate live or staging server endpoint.
+///
 - (nonnull instancetype)initWithMerchantId:(NSInteger)merchantId secret:(NSString * _Nonnull)secret isProduction:(BOOL)isProduction OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
@@ -932,35 +1070,69 @@ SWIFT_CLASS("_TtC12KPPaymentSDK9KPPayment")
 enum KPPaymentType : NSInteger;
 
 @interface KPPayment (SWIFT_EXTENSION(KPPaymentSDK))
+/// Method that will perform transaction with kiplePay’s App. Will redirect to kiplePay App if installed.
+/// \param storeId kiplePay’s storeId.
+///
+/// \param type The payment type enum.
+///
+/// \param referenceId Unique referenceId generated from sender to keep track of transaction details.
+///
+/// \param amount Double representation of transation amount (will be rounded to two decimal places).
+///
 - (void)makePaymentForStoreId:(NSInteger)storeId withType:(enum KPPaymentType)type withReferenceId:(NSString * _Nonnull)referenceId andAmount:(double)amount;
+/// Method that will check transaction details based on referenceId.
+/// \param referenceId Unique referenceId generated from sender to keep track of transaction details.
+///
+/// \param completionHandler The block to execute with the results.
+/// Provide a value for this parameter if you want to inspect the payload of the transaction details.
+/// This block is executed asynchronously on your app’s main thread.
+/// The block has no return value and takes the following parameter:
+///
+/// \param payload A string valued dictionary of the transaction details based on referenceId.
+/// The key for the dictionary are if unsuccessful: Error; if successful:
+/// Status, Amount, TransactionId, TradeDate, ReferenceId, StoreId.
+///
 - (void)transactionStatusForReferenceId:(NSString * _Nonnull)referenceId completionHandler:(void (^ _Nonnull)(NSDictionary<NSString *, NSString *> * _Nonnull))completionHandler;
 @end
 
+/// Specifies the payment type of a payment object.
 typedef SWIFT_ENUM(NSInteger, KPPaymentType, closed) {
+/// Represents payment.
   KPPaymentTypePayment = 0,
+/// Represents mobile reload payment type.
   KPPaymentTypeMobileReload = 1,
+/// Represents pay bill payment type.
   KPPaymentTypePayBill = 2,
 };
 
+/// Specifies the payment status of a payment object.
 typedef SWIFT_ENUM(NSInteger, KPPaymentStatus, closed) {
+/// Represents successful transaction.
   KPPaymentStatusSuccessful = 0,
+/// Represents pending transaction.
   KPPaymentStatusPending = 1,
+/// Represents failed transaction.
   KPPaymentStatusFailed = 2,
+/// Represents cancelled transaction.
   KPPaymentStatusCancelled = 3,
 };
 
 @class UIApplication;
 
+/// A payment delegate object to interface with UIApplication.
 SWIFT_CLASS("_TtC12KPPaymentSDK28KPPaymentApplicationDelegate")
 @interface KPPaymentApplicationDelegate : NSObject
+/// Returns the singleton payment delegate object.
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) KPPaymentApplicationDelegate * _Nonnull shared;)
 + (KPPaymentApplicationDelegate * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+/// Method to listen to deeplink integration.
 - (BOOL)application:(UIApplication * _Nonnull)app open:(NSURL * _Nonnull)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> * _Nonnull)options;
 @end
 
 
+/// A set of methods implemented by the delegate of a payment object to post transaction.
 SWIFT_PROTOCOL("_TtP12KPPaymentSDK17KPPaymentDelegate_")
 @protocol KPPaymentDelegate <NSObject>
 - (void)paymentDidFinishSuccessfully:(BOOL)flag withMessage:(NSString * _Nonnull)message andPayload:(NSDictionary<NSString *, NSString *> * _Nonnull)payload;
