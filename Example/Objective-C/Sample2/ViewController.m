@@ -33,15 +33,15 @@
 
 @implementation ViewController
 
-@synthesize payment;
+@synthesize _payment;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    payment = [[KPPayment alloc] initWithMerchantId:141
+    _payment = [[KPPayment alloc] initWithMerchantId:141
                                              secret:@"l43wrf8cai"
                                        isProduction:NO];
-    payment.delegate = self;
+    _payment.delegate = self;
 }
 
 
@@ -65,7 +65,7 @@
 }
 
 - (IBAction)payButtonTapped:(id)sender {
-    [payment makePaymentForStoreId:103
+    [_payment makePaymentForStoreId:103
                           withType:KPPaymentTypePayment
                    withReferenceId:@"abcd1234"
                          andAmount:12.34];

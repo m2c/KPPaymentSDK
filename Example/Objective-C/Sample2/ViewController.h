@@ -30,7 +30,7 @@
 
 @interface ViewController : UIViewController <KPPaymentDelegate>
 
-@property (nonatomic, retain) KPPayment *payment;
+@property (nonatomic, retain) KPPayment *_payment;
 
 
 @end
