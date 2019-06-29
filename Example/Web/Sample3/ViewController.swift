@@ -31,13 +31,13 @@ class ViewController: UIViewController, KPPaymentDelegate {
 
     @IBOutlet weak var referenceIdTextField: UITextField!
 
-//        let payment = KPPayment(merchantId: 48, storeId: 38, secret: "l43wrf8cai") // sandbox
-    let payment = KPPayment(merchantId: 141, storeId: 103, secret: "l43wrf8cai") // staging
+//    private let payment = KPPayment(merchantId: 48, storeId: 38, secret: "l43wrf8cai") // sandbox
+    private let payment = KPPayment(merchantId: 141, storeId: 103, secret: "l43wrf8cai") // staging
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        payment.delegate = self
+        self.payment.delegate = self
     }
 
     @IBAction func payButtonTapped(_ sender: UIButton) {
