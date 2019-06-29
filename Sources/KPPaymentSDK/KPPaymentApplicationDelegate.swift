@@ -25,12 +25,30 @@
 //  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 //  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import XCTest
+import UIKit
 
-#if !os(macOS)
-public func allTests() -> [XCTestCaseEntry] {
-    return [
-        testCase(KPPaymentSDKTests.allTests),
-    ]
+internal protocol KPPaymentAppDelegate : NSObjectProtocol {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any])
 }
-#endif
+
+@objc public final class KPPaymentApplicationDelegate : NSObject {
+    @objc public static let shared = KPPaymentApplicationDelegate()
+
+    internal weak var delegate: KPPaymentAppDelegate?
+
+    private override init() {}
+
+    @objc @discardableResult public final func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any]) -> Bool {
+        guard let scheme = url.scheme else {
+            return false
+        }
+
+        let schemes = scheme.components(separatedBy: ".")
+
+        if schemes.first == "kiple" {
+            self.delegate?.application(app, open: url, options: options)
+            return true
+        }
+        return false
+    }
+}

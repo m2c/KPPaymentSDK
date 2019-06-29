@@ -25,12 +25,30 @@
 //  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 //  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import XCTest
+import Foundation
 
-#if !os(macOS)
-public func allTests() -> [XCTestCaseEntry] {
-    return [
-        testCase(KPPaymentSDKTests.allTests),
-    ]
+struct Constant {
+    struct Message {
+        static let failureDefault = "We're sorry, but something went wrong."
+    }
+
+//    static let generateDeeplinkURL = "https://sandbox.kiplepay.com:94/api/deeplinks/generate"
+    static let generateDeeplinkURL = "https://staging.kiplepay.com:94/api/deeplinks/generate"
 }
-#endif
+
+extension String {
+    var formattedKiple: Date {
+        if let date = String.formatterKiple.date(from: self) {
+            return date
+        } else {
+            return Date()
+        }
+    }
+
+    static let formatterKiple: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSSzzzz"
+
+        return formatter
+    }()
+}

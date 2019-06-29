@@ -25,12 +25,14 @@
 //  OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 //  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import XCTest
+#import <UIKit/UIKit.h>
 
-#if !os(macOS)
-public func allTests() -> [XCTestCaseEntry] {
-    return [
-        testCase(KPPaymentSDKTests.allTests),
-    ]
-}
-#endif
+//! Project version number for KPPaymentSDK.
+FOUNDATION_EXPORT double KPPaymentSDKVersionNumber;
+
+//! Project version string for KPPaymentSDK.
+FOUNDATION_EXPORT const unsigned char KPPaymentSDKVersionString[];
+
+// In this header, you should import all the public headers of your framework using statements like #import <KPPaymentSDK/PublicHeader.h>
+
+
