@@ -132,7 +132,7 @@ Pod::Spec.new do |s|
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"
 
-  s.cocoapods_version = '>= 1.6.0'
+  s.cocoapods_version = ">= 1.6.0"
   if s.respond_to?(:swift_versions) then
     s.swift_versions = ["5.0"]
   else
