@@ -65,11 +65,10 @@ public extension KPPayment {
         /// Init method to initialize payment type from string.
         ///
         /// - Parameter string: String representation of payment type.
-        /// - Returns: Payment type enum object.
-        public static func type(stringValue string: String) -> KPPaymentType? {
+        public init?(stringValue string: String) {
             for c in KPPaymentType.allCases {
                 if c.toString() == string {
-                    return c
+                    self = c
                 }
             }
             return nil
@@ -110,11 +109,10 @@ public extension KPPayment {
         /// Init method to initialize payment status from string.
         ///
         /// - Parameter string: String representation of payment status.
-        /// - Returns: Payment status enum object.
-        public static func status(stringValue string: String) -> KPPaymentStatus? {
+        public init?(stringValue string: String) {
             for c in KPPaymentStatus.allCases {
                 if c.toString() == string {
-                    return c
+                    self = c
                 }
             }
             return nil
