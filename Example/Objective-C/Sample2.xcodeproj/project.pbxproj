@@ -13,18 +13,18 @@
 		2E2F3F2F2138808C00C563E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E2F3F2E2138808C00C563E3 /* Assets.xcassets */; };
 		2E2F3F322138808C00C563E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E2F3F302138808C00C563E3 /* LaunchScreen.storyboard */; };
 		2E2F3F352138808C00C563E3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2F3F342138808C00C563E3 /* main.m */; };
-		B8DCC0EE22C8B5350003C63C /* KPPaymentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8DCC0ED22C8B5350003C63C /* KPPaymentSDK.framework */; };
-		B8DCC0EF22C8B5350003C63C /* KPPaymentSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B8DCC0ED22C8B5350003C63C /* KPPaymentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2ECA6DFE213D12EE005DEE6E /* KPPaymentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2ECA6DFD213D12EE005DEE6E /* KPPaymentSDK.framework */; };
+		2ECA6DFF213D12EE005DEE6E /* KPPaymentSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2ECA6DFD213D12EE005DEE6E /* KPPaymentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		B8DCC0F022C8B5350003C63C /* Embed Frameworks */ = {
+		2E2F3F402138810400C563E3 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B8DCC0EF22C8B5350003C63C /* KPPaymentSDK.framework in Embed Frameworks */,
+				2ECA6DFF213D12EE005DEE6E /* KPPaymentSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -42,7 +42,7 @@
 		2E2F3F312138808C00C563E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E2F3F332138808C00C563E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E2F3F342138808C00C563E3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		B8DCC0ED22C8B5350003C63C /* KPPaymentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KPPaymentSDK.framework; sourceTree = "<group>"; };
+		2ECA6DFD213D12EE005DEE6E /* KPPaymentSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KPPaymentSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B8DCC0EE22C8B5350003C63C /* KPPaymentSDK.framework in Frameworks */,
+				2ECA6DFE213D12EE005DEE6E /* KPPaymentSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,7 +93,7 @@
 		B823BF0722C871C400CF75B8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B8DCC0ED22C8B5350003C63C /* KPPaymentSDK.framework */,
+				2ECA6DFD213D12EE005DEE6E /* KPPaymentSDK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -108,7 +108,7 @@
 				2E2F3F1E2138808B00C563E3 /* Sources */,
 				2E2F3F1F2138808B00C563E3 /* Frameworks */,
 				2E2F3F202138808B00C563E3 /* Resources */,
-				B8DCC0F022C8B5350003C63C /* Embed Frameworks */,
+				2E2F3F402138810400C563E3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
