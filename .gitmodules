@@ -1,0 +1,6 @@
+[submodule "Example/Submodule/Swift/KPPaymentSDK"]
+	path = Example/Submodule/Swift/KPPaymentSDK
+	url = https://github.com/m2c/KPPaymentSDK.git
+[submodule "Example/Submodule/Objective-C/KPPaymentSDK"]
+	path = Example/Submodule/Objective-C/KPPaymentSDK
+	url = https://github.com/m2c/KPPaymentSDK.git

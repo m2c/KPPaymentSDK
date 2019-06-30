@@ -13,7 +13,40 @@
 		2E2F3F2F2138808C00C563E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E2F3F2E2138808C00C563E3 /* Assets.xcassets */; };
 		2E2F3F322138808C00C563E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E2F3F302138808C00C563E3 /* LaunchScreen.storyboard */; };
 		2E2F3F352138808C00C563E3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2E2F3F342138808C00C563E3 /* main.m */; };
+		B8B42AD822C87D3F007F97A9 /* KPPaymentSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B42AD522C87D2B007F97A9 /* KPPaymentSDK.framework */; };
+		B8B42ADA22C87D5F007F97A9 /* KPPaymentSDK.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = B8B42AD522C87D2B007F97A9 /* KPPaymentSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B8B42AD422C87D2B007F97A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B8B42ACF22C87D2B007F97A9 /* KPPaymentSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2E33C51F213836E2007FB33D;
+			remoteInfo = KPPaymentSDK;
+		};
+		B8B42AD622C87D2B007F97A9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B8B42ACF22C87D2B007F97A9 /* KPPaymentSDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2E33C528213836E2007FB33D;
+			remoteInfo = KPPaymentSDKTests;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B8B42AD922C87D4B007F97A9 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B8B42ADA22C87D5F007F97A9 /* KPPaymentSDK.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		2E2F3F222138808B00C563E3 /* Sample5.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sample5.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -26,6 +59,7 @@
 		2E2F3F312138808C00C563E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E2F3F332138808C00C563E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E2F3F342138808C00C563E3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B8B42ACF22C87D2B007F97A9 /* KPPaymentSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KPPaymentSDK.xcodeproj; path = KPPaymentSDK/KPPaymentSDK.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8B42AD822C87D3F007F97A9 /* KPPaymentSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,8 +110,18 @@
 		B823BF0722C871C400CF75B8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B8B42ACF22C87D2B007F97A9 /* KPPaymentSDK.xcodeproj */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B8B42AD022C87D2B007F97A9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B8B42AD522C87D2B007F97A9 /* KPPaymentSDK.framework */,
+				B8B42AD722C87D2B007F97A9 /* KPPaymentSDKTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -89,6 +134,7 @@
 				2E2F3F1E2138808B00C563E3 /* Sources */,
 				2E2F3F1F2138808B00C563E3 /* Frameworks */,
 				2E2F3F202138808B00C563E3 /* Resources */,
+				B8B42AD922C87D4B007F97A9 /* Copy Frameworks */,
 			);
 			buildRules = (
 			);
@@ -125,12 +171,35 @@
 			mainGroup = 2E2F3F192138808B00C563E3;
 			productRefGroup = 2E2F3F232138808B00C563E3 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = B8B42AD022C87D2B007F97A9 /* Products */;
+					ProjectRef = B8B42ACF22C87D2B007F97A9 /* KPPaymentSDK.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				2E2F3F212138808B00C563E3 /* Sample5 */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		B8B42AD522C87D2B007F97A9 /* KPPaymentSDK.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = KPPaymentSDK.framework;
+			remoteRef = B8B42AD422C87D2B007F97A9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B8B42AD722C87D2B007F97A9 /* KPPaymentSDKTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = KPPaymentSDKTests.xctest;
+			remoteRef = B8B42AD622C87D2B007F97A9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		2E2F3F202138808B00C563E3 /* Resources */ = {
@@ -301,7 +370,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Sample5",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Sample5/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -330,7 +398,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Sample5",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Sample5/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
