@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Sample2.xcodeproj">
+      location = "self:/Users/zaid/Developer/KPPaymentSDK/Example/Submodule/Objective-C/Sample5.xcodeproj">
    </FileRef>
 </Workspace>
