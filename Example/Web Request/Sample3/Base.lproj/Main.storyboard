@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Sample3" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cwi-Xa-Ixe">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="S8I-gV-sBm" appends="YES" id="Kqr-Ba-afo"/>
+                                </connections>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3rR-JD-LWd">
+                                <rect key="frame" x="138" y="328.5" width="99" height="30"/>
+                                <state key="normal" title="Pay With Kiple"/>
+                                <connections>
+                                    <action selector="payButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N4b-wz-h5o"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Reference ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lvK-X8-FJ0">
+                                <rect key="frame" x="16" y="36" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Cwi-Xa-Ixe" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="2cC-AQ-jJH"/>
+                            <constraint firstItem="Cwi-Xa-Ixe" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="89j-Bc-tFb"/>
+                            <constraint firstItem="3rR-JD-LWd" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="8DH-Xa-wkE"/>
+                            <constraint firstAttribute="bottom" secondItem="Cwi-Xa-Ixe" secondAttribute="bottom" id="AQs-de-yxE"/>
+                            <constraint firstItem="lvK-X8-FJ0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="EXS-ic-pB9"/>
+                            <constraint firstAttribute="trailing" secondItem="Cwi-Xa-Ixe" secondAttribute="trailing" id="Nrm-dF-ZZz"/>
+                            <constraint firstItem="3rR-JD-LWd" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="kf7-nm-zQ2"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lvK-X8-FJ0" secondAttribute="trailing" constant="16" id="oal-pP-hWn"/>
+                            <constraint firstItem="lvK-X8-FJ0" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="vru-TM-0kO"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="referenceIdTextField" destination="lvK-X8-FJ0" id="uB6-Uy-UM6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="S8I-gV-sBm">
+                    <connections>
+                        <action selector="backgroundViewTapped:" destination="BYZ-38-t0r" id="9Gk-bf-429"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="132.68365817091455"/>
+        </scene>
+    </scenes>
+</document>
