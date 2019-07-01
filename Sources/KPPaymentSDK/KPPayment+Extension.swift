@@ -160,9 +160,9 @@ public extension KPPayment {
     ///                        Provide a value for this parameter if you want to inspect the payload of the transaction details.
     ///                        This block is executed asynchronously on your app's main thread.
     ///                        The block has no return value and takes the following parameter:
-    ///   - payload: A string valued dictionary of the transaction details based on referenceId.
-    ///              The key for the dictionary are if unsuccessful: Error; if successful:
-    ///              Status, Amount, TransactionId, TradeDate, ReferenceId, StoreId.
+    /// - Parameter payload: A string valued dictionary of the transaction details based on referenceId.
+    ///                      The key for the dictionary are if unsuccessful: Error; if successful:
+    ///                      Status, Amount, TransactionId, TradeDate, ReferenceId, StoreId.
     @objc final func transactionStatusForReferenceId(_ referenceId: String, completionHandler: @escaping (_ payload: [String : String]) -> Void) {
         let baseURL = self.isProduction ? Constant.productionStatusBaseURL : Constant.stagingStatusBaseURL
         if let appURL = URL(string: "\(baseURL)/api/wallets/me/deeplink-payment/\(self.merchantId)/\(referenceId)") {
