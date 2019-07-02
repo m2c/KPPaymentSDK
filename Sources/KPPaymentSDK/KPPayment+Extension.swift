@@ -52,6 +52,8 @@ public extension KPPayment {
                 return "MobileReload"
             case .PayBill:
                 return "PayBill"
+            @unknown case _:
+                return ""
             }
         }
 
@@ -103,6 +105,8 @@ public extension KPPayment {
                 return "Failed"
             case .Cancelled:
                 return "Cancelled"
+            @unknown case _:
+                return ""
             }
         }
 

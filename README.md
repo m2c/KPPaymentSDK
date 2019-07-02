@@ -62,9 +62,7 @@ class ViewController: UIViewController, KPPaymentDelegate {
 
 ## Installation
 
-#### <img src="https://cloud.githubusercontent.com/assets/432536/5252404/443d64f4-7952-11e4-9d26-fc5cc664cb61.png" width="24" height="24"> [Carthage]
-
-[Carthage]: https://github.com/Carthage/Carthage
+#### Carthage
 
 To install it, simply add the following line to your **Cartfile**:
 
@@ -79,11 +77,9 @@ for up to date installation instructions.
 
 [carthage-installation]: https://github.com/Carthage/Carthage#adding-frameworks-to-an-application
 
-#### <img src="https://raw.githubusercontent.com/m2c/KPPaymentSDK/master/Resources/Images/cocoapods.png" width="24" height="24"> [CocoaPods]
+#### CocoaPods
 
-[CocoaPods]: http://cocoapods.org
-
-To install it, simply add the following line to your Podfile:
+To install it, simply add the following line to your **Podfile**:
 
 ```ruby
 pod 'KPPaymentSDK'
@@ -97,9 +93,29 @@ use_frameworks!
 
 Then run `pod install` with CocoaPods 1.6.0 or newer.
 
+#### Swift Package Manager
+
+To install it, simply add the following line to your **Package.swift**:
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/m2c/KPPaymentSDK", .upToNextMinor(from: "1.1.0"))
+]
+```
+
+or more strict:
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/m2c/KPPaymentSDK.git", .exact("1.1.0"))
+]
+```
+
+Then run `swift package update`.
+
 #### Manually
 
-KPPaymentSDK in your project requires the following steps:
+To install KPPaymentSDK in your project requires the following steps:
 
 1. Add KPPaymentSDK as a [submodule](http://git-scm.com/docs/git-submodule) by opening the Terminal, `cd`-ing into your top-level project directory, and entering the command `git submodule add https://github.com/m2c/KPPaymentSDK.git`
 2. Open the `KPPaymentSDK` folder, and drag `KPPaymentSDK.xcodeproj` into the file navigator of your app project.
