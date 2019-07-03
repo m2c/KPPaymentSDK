@@ -67,9 +67,9 @@ public extension KPPayment {
         /// Implemented by subclasses to initialize a new enum object immediately after memory for it has been allocated, if able.
         ///
         /// - Parameter string: String representation of payment type.
-        public init?(stringValue string: String) {
+        public init?(stringValue: String) {
             for c in KPPaymentType.allCases {
-                if c.toString() == string {
+                if c.toString() == stringValue {
                     self = c
                 }
             }
@@ -113,9 +113,9 @@ public extension KPPayment {
         /// Implemented by subclasses to initialize a new enum object immediately after memory for it has been allocated, if able.
         ///
         /// - Parameter string: String representation of payment status.
-        public init?(stringValue string: String) {
+        public init?(stringValue: String) {
             for c in KPPaymentStatus.allCases {
-                if c.toString() == string {
+                if c.toString() == stringValue {
                     self = c
                 }
             }
