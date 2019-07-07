@@ -71,6 +71,7 @@ public extension KPPayment {
             for c in KPPaymentType.allCases {
                 if c.toString() == stringValue {
                     self = c
+                    return
                 }
             }
             return nil
@@ -117,6 +118,7 @@ public extension KPPayment {
             for c in KPPaymentStatus.allCases {
                 if c.toString() == stringValue {
                     self = c
+                    return
                 }
             }
             return nil
