@@ -16,15 +16,18 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "KPPaymentSDK"
-  s.version      = "1.0.0"
-  s.summary      = "Pay with kiplePay."
+  s.version      = "1.1.0"
+  s.summary      = "This library allows you to integrate kiplePay into your iOS app."
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
-  s.description  = "This library allows you to integrate kiplePay into your iOS app."
+  s.description  = <<-DESC
+                     KPPaymentSDK is a kiplePay deeplink framework written in Swift,
+                     created for kiplePay app. It uses CryptoSwift.
+                   DESC
 
   s.homepage     = "https://kiplepay.com"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
@@ -37,8 +40,7 @@ Pod::Spec.new do |s|
   #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
   #
 
-  s.license      = "MIT"
-  # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
+  s.license      = { :type => "BSD", :file => "LICENSE" }
 
 
   # ――― Author Metadata  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -51,7 +53,7 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
 
-  s.author             = { "Kiple Developer" => "kipledeveloper@kiplepay.com" }
+  s.author             = { "Kiple Sdn Bhd and its affiliates" => "kipledeveloper@kiplepay.com" }
   s.social_media_url   = "https://www.facebook.com/kiplepay/"
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -60,7 +62,6 @@ Pod::Spec.new do |s|
   #  the deployment target. You can optionally include the target after the platform.
   #
 
-  # s.platform     = :ios
   s.platform     = :ios, "9.0"
 
   #  When using multiple platforms
@@ -87,7 +88,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "KPPaymentSDK", "KPPaymentSDK/*.{h,swift}"
+  s.source_files  = "Sources/**/*.{h,swift}"
   # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
@@ -131,6 +132,11 @@ Pod::Spec.new do |s|
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"
 
-  s.swift_version = "4.1"
+  s.cocoapods_version = ">= 1.6.0"
+  if s.respond_to?(:swift_versions) then
+    s.swift_versions = ["5.0"]
+  else
+    s.swift_version = "5.0"
+  end
 
 end
